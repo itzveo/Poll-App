@@ -1,0 +1,25 @@
+@import './../../styles.scss';
+
+.home {
+  @include dFlex($jc: flex-start, $ai: flex-start);
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding-inline: 111px;
+  padding-bottom: 80px;
+  > app-info {
+    width: 100%;
+  }
+  > app-ending-soon {
+    width: 100%;
+  }
+  > app-survey-list {
+    width: 100%;
+  }
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar{
+    display: none;
+  }
+}

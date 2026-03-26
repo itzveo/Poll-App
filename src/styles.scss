@@ -1,1 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+  --sb-track-color: #bababa;
+  --sb-thumb-color: #ffb770;
+  --sb-size: 8px;
+  height: 100vh;
+  width: 100%;
+  background-color: #35273A;
+  color: #FFB770;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 10px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+
+a{
+    text-decoration: none;
+    &:visited{
+        text-decoration: none;
+    }
+}
+
+@mixin dFlex($jc: center, $ai: center){
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+$g: #70e61c;
+
+@font-face {
+    font-family: "Mulish-Bold";
+    src: url("/assets/fonts/Mulish-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Mulish-SemiBold";
+    src: url("/assets/fonts/Mulish-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Mulish-Medium";
+    src: url("/assets/fonts/Mulish-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Mulish";
+    src: url("/assets/fonts/Mulish-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Nokora-Bold";
+    src: url("/assets/fonts/Nokora-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Nokora";
+    src: url("/assets/fonts/Nokora-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Nerko";
+    src: url("/assets/fonts/NerkoOne-Regular.ttf");
+}

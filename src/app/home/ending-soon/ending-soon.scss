@@ -1,0 +1,28 @@
+@import "./../../../styles.scss";
+
+.ending-soon{
+    @include dFlex();
+    flex-direction: column;
+    padding-top: 80px;
+    padding-inline: 80px;
+    >h2{
+        font: 72px "Nerko"
+    }
+}
+
+.wrapper{
+    @include dFlex($ai: flex-start);
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    >h3{
+       font: 32px "Mulish-Medium";
+       color: white; 
+    }
+}
+
+.survey-wrapper{
+    @include dFlex($jc: flex-start);
+    gap: 32px;
+    width: 100%;
+}

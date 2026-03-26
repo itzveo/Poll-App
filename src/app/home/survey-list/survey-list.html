@@ -1,1 +1,32 @@
-<p>survey-list works!</p>
+<section class="survey-list">
+  <div class="button-wrapper">
+    <div>
+      <button id="active" class="active--selected">Active survey</button>
+      <button id="past" class="past">Past survey</button>
+    </div>
+    <div class="dropdown-wrapper">
+      <div class="dropdown-trigger" onclick="toggleDropdown()">
+        <span>Select by categories</span>
+        <img src="/assets/drop_down.svg" class="chevron-icon" alt="" width="16" height="16" />
+        <img src="/assets/drop_down_hover.svg" class="chevron-icon" alt="" width="16" height="16" />
+      </div>
+
+      <div class="dropdown-menu">
+        <div class="dropdown-option">Design</div>
+        <div class="dropdown-option">Development</div>
+        <div class="dropdown-option">Marketing</div>
+        <div class="dropdown-option">Product</div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper">
+    <app-survey-preview></app-survey-preview>
+    <app-survey-preview></app-survey-preview>
+    <app-survey-preview></app-survey-preview>
+    <app-survey-preview></app-survey-preview>
+    <app-survey-preview></app-survey-preview>
+    <app-survey-preview></app-survey-preview>
+    <app-survey-preview></app-survey-preview>
+    <app-survey-preview></app-survey-preview>
+  </div>
+</section>

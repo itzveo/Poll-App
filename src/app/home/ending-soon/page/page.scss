@@ -1,0 +1,39 @@
+@import './../../../../styles.scss';
+
+.page {
+  @include dFlex($ai: flex-start, $jc: space-between);
+  flex-direction: column;
+  background-color: #faf5fe;
+  height: 310px;
+  width: 321px;
+  border-top-right-radius: 80px;
+  padding: 40px 18px 40px 18px;
+  div {
+    @include dFlex($ai: flex-start);
+    flex-direction: column;
+    gap: 8px;
+    > h3 {
+      font: 14px 'Mulish-SemiBold';
+      color: #35273a;
+    }
+    > h2 {
+      font: 26px 'Mulish-Bold';
+      color: #35273a;
+    }
+  }
+  >span{
+    font: 12px "Mulish-Medium";
+    color: #35273A;
+    background-color: #FFCFA1;
+    border-top-right-radius: 14px;
+    padding: 3px 6px 3px 6px;
+  }
+  &:hover {
+    cursor: pointer;
+    transition: ease-out 0.1s;
+    background-color: #F4E9FB;
+    >span{
+        background-color: #FFB770;
+    }
+  }
+}
