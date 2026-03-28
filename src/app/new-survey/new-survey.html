@@ -1,1 +1,67 @@
-<p>new-survey works!</p>
+<section class="new-survey">
+  <div class="wrapper">
+    <main class="main">
+      <header>
+        <div>
+          <span>Draft</span>
+          <h1>Create new survey</h1>
+        </div>
+        <button (click)="backToHome()" id="cancel">
+          Cancel<img src="/assets/close.svg" alt="" />
+        </button>
+      </header>
+      <form class="survey">
+        <div class="info">
+          <div class="left">
+            <span>Survey name</span>
+            <div class="input-wrapper">
+              <input wideCaret class="input" type="text" />
+              <div class="fake-caret"></div>
+              <div class="delete">
+                <img class="delete--default" src="/assets/delete.svg" alt="" />
+                <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+              </div>
+            </div>
+            <span>Set end date <small>(optional)</small></span>
+            <section>
+              <div class="input-wrapper">
+                <input wideCaret class="input" type="text" />
+                <div class="fake-caret"></div>
+                <div class="delete">
+                  <img class="delete--default" src="/assets/delete.svg" alt="" />
+                  <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+                </div>
+              </div>
+              <div class="dropdown-div">
+                <div class="dropdown">Choose category</div>
+                <img src="/assets/drop_down.svg" alt="" />
+                <div class="dropdown-options">
+                  <span>Option 1</span>
+                  <span>Option 2</span>
+                  <span>Option 3</span>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="right">
+            <span>Describing text <small>(optional)</small></span>
+            <div class="input-wrapper">
+              <textarea wideCaret name="description" id="description" class="input"></textarea>
+              <div class="fake-caret"></div>
+            </div>
+          </div>
+        </div>
+        <section class="question-wrapper">
+          <app-question ngSkipHydration></app-question>
+          <app-question ngSkipHydration></app-question>
+          <button class="add_q_btn">
+            Add next question <img src="/assets/add_light.svg" alt="" />
+          </button>
+        </section>
+      </form>
+    </main>
+    <div>
+      <button class="">Publish<img src="/assets/check.svg" alt="" /></button>
+    </div>
+  </div>
+</section>

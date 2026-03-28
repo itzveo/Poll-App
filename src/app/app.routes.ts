@@ -6,6 +6,6 @@ import { NewSurvey } from './new-survey/new-survey';
 export const routes: Routes = [
     { path: '', component: Home },
     { path: 'survey:/survey', component: Survey },
-    { path: 'new:/new', component: NewSurvey },
+    { path: 'new', component: NewSurvey },
     { path: '**', redirectTo: ''}
 ];

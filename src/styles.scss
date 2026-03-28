@@ -51,7 +51,10 @@ a{
     align-items: $ai;
 }
 
-$g: #70e61c;
+@mixin bR($br: 5px, $tr: 20px){
+    border-radius: $br;
+    border-top-right-radius: $tr;
+}
 
 @font-face {
     font-family: "Mulish-Bold";
@@ -86,4 +89,68 @@ $g: #70e61c;
 @font-face {
     font-family: "Nerko";
     src: url("/assets/fonts/NerkoOne-Regular.ttf");
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.delete {
+  object-fit: cover;
+  height: 26px;
+  width: 26px;
+  padding: 4px;
+  border-radius: 3px;
+
+  &--default {
+    display: flex;
+  }
+  &--hover {
+    display: none;
+  }
+
+  &:hover {
+    background-color: #ffd4a9;
+    .delete--default {
+      display: none;
+    }
+    .delete--hover {
+      @include dFlex();
+    }
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input {
+  @include bR();
+  border: none;
+  padding: 7px 13px 7px 13px;
+  height: 37px;
+  caret-color: transparent;
+  width: 100%;
+  &:focus {
+    outline: none;
+    background-color: #fee9d4;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.fake-caret {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  border-radius: 2px;
+  height: 18px;
+  background: #35273a;
+  pointer-events: none;
+  animation: blink 1s step-end infinite;
 }

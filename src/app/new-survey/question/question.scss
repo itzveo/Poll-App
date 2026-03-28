@@ -1,0 +1,85 @@
+@import './../../../styles.scss';
+
+.question {
+  @include dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  padding-right: 40px;
+}
+
+.Q {
+  @include dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  > div {
+    @include dFlex($jc: space-between);
+    width: 100%;
+    > h2 {
+      font: 18px 'Mulish-Bold';
+      color: white;
+    }
+  }
+}
+
+.A {
+  @include dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  > div {
+    @include dFlex($jc: space-between);
+    width: 100%;
+    > h2 {
+      font: 18px 'Mulish-Bold';
+      color: white;
+    }
+    > div {
+      @include dFlex();
+      gap: 8px;
+    }
+  }
+  > .btn_wrapper {
+    width: fit-content;
+    padding: 8px 12px 8px 12px;
+    > button {
+      @include dFlex();
+      gap: 4px;
+      background: transparent;
+      color: white;
+      border: transparent;
+      border-bottom: 1px solid;
+      font: 16px 'Nokora-Bold';
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &:hover{
+        background-color: #faf5fe33;
+    }
+  }
+}
+
+.multi-A {
+  height: 15px;
+  width: 15px;
+  border: solid 1.5px white;
+  border-radius: 3px;
+  @include dFlex();
+  > img {
+    display: none;
+    object-fit: cover;
+    width: 9px;
+    height: 7px;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: #ffcfa199;
+  }
+}
+
+.answer {
+  @include dFlex();
+  gap: 8px;
+}

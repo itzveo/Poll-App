@@ -1,0 +1,199 @@
+@import './../../styles.scss';
+
+.new-survey {
+  @include dFlex();
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+}
+
+.wrapper {
+  @include dFlex($ai: flex-start);
+  flex-direction: column;
+  width: 100%;
+  max-width: 1166px;
+  background-color: #35273a;
+  margin-inline: 109px;
+  margin-block: 72px;
+  padding: 40px 54px 40px 54px;
+  @include bR($tr: 100px);
+  > div {
+    @include dFlex($jc: flex-end);
+    width: 100%;
+    padding-top: 48px;
+    > button {
+      @include dFlex();
+      gap: 10px;
+      background-color: #ffcfa1;
+      padding: 12px 16px 12px 16px;
+      font: 18px 'Nokora-Bold';
+      color: #221227;
+      border: none;
+      border-radius: 10px;
+      
+      > img {
+        display: none;
+        object-fit: contain;
+        height: 18px;
+        width: 18px;
+        margin-bottom: 6px;
+      }
+      &:hover {
+        background-color: #ffb770;
+        cursor: pointer;
+        > img {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+.main {
+  @include dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  > header {
+    @include dFlex($jc: space-between, $ai: flex-end);
+    width: 100%;
+    > div {
+      @include dFlex($ai: flex-start);
+      flex-direction: column;
+      gap: 10px;
+      > span {
+        padding: 3px 12px 3px 8px;
+        background-color: #ffcfa1;
+        color: #221227;
+        font: 16px 'Mulish-SemiBold';
+        border-top-right-radius: 14px;
+      }
+      > h1 {
+        color: #ee9236;
+        font: 56px 'Nerko';
+      }
+    }
+    > button {
+      @include dFlex();
+      gap: 10px;
+      padding: 8px 12px 8px 12px;
+      font: 16px 'Nokora-Bold';
+      color: white;
+      background-color: #ffb7704d;
+      border: none;
+      border-radius: 10px;
+      &:hover {
+        cursor: pointer;
+        background-color: #ae7e5a;
+      }
+    }
+  }
+}
+
+.survey {
+  @include dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 64px;
+  background-color: #8e709929;
+  padding: 64px;
+  width: 100%;
+  @include bR($tr: 80px);
+  > .info {
+    @include dFlex($jc: flex-start);
+    gap: 40px;
+    width: 100%;
+    > .left {
+      @include dFlex($ai: flex-start);
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 40px;
+      width: 50%;
+      > .input-wrapper {
+        justify-content: flex-start !important;
+      }
+      > span {
+        font: 18px 'Mulish-Bold';
+        color: white;
+        > small {
+          font: 18px 'Mulish';
+        }
+      }
+      > div,
+      > section > div {
+        @include dFlex();
+        gap: 8px;
+        > input {
+          @include bR();
+          border: none;
+          padding: 7px 13px 7px 13px;
+          height: 37px;
+        }
+      }
+      > section {
+        @include dFlex($jc: flex-start);
+        width: 100%;
+        gap: 8px;
+        .dropdown-div {
+          @include dFlex($jc: space-between);
+          width: 50%;
+          height: 32px;
+          font: 18px 'Mulish-Bold';
+          color: white;
+          padding: 4px 6px 4px 10px;
+          border-radius: 6px;
+          &:hover {
+            cursor: pointer;
+            background-color: #55475a;
+          }
+          > .dropdown-options {
+            display: none;
+          }
+        }
+        > div {
+          width: 50%;
+        }
+      }
+    }
+    > .right {
+      @include dFlex($ai: flex-start, $jc: flex-start);
+      flex-direction: column;
+      gap: 8px;
+      width: 50%;
+      > span {
+        font: 18px 'Mulish-Bold';
+        color: white;
+        > small {
+          font: 18px 'Mulish';
+        }
+      }
+      > div > textarea {
+        height: 108px;
+        width: 418px;
+        @include bR();
+        padding: 15px 13px 7px 13px;
+        resize: none;
+      }
+    }
+  }
+  > .question-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 40px;
+    width: 100%;
+    > button {
+      @include dFlex();
+      gap: 10px;
+      background-color: #ffb7704d;
+      padding: 8px 12px 8px 12px;
+      border-radius: 10px;
+      border: none;
+      width: 204px;
+      color: white;
+      font: 16px 'Nokora-Bold';
+      &:hover {
+        cursor: pointer;
+        background-color: #ae7e5a;
+      }
+    }
+  }
+}
