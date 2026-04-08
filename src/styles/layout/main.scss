@@ -1,0 +1,52 @@
+@use './../abstract' as a;
+
+@media (max-width: 1375px) {
+  .home>app-info>.info {
+    @include a.dFlex($ai: flex-start !important);
+    flex-direction: column;
+
+    .wrapper__text {
+      display: contents;
+
+      h1 {
+        order: 1;
+      }
+      p {
+        order: 3;
+      }
+      button {
+        order: 4;
+        align-self: center;
+      }
+    }
+
+    .wrapper__img {
+      order: 2;
+    }
+  }
+
+  .home {
+    padding-inline: 16px !important;
+  }
+
+  .ending-soon {
+    padding-inline: 0 !important;
+  }
+
+  .survey-list {
+    padding-inline: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .button-wrapper {
+    @include a.dFlex($ai: flex-start !important);
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .wrapper__surveys {
+    grid-template-columns: auto !important;
+    height: max-content !important;
+  }
+}

@@ -1,5 +1,6 @@
 <section class="new-survey">
-  <div class="wrapper">
+  <app-main-header></app-main-header>
+  <div class="wrapper__new_survey">
     <main class="main">
       <header>
         <div>
@@ -7,7 +8,8 @@
           <h1>Create new survey</h1>
         </div>
         <button (click)="backToHome()" id="cancel">
-          Cancel<img src="/assets/close.svg" alt="" />
+          <span>Cancel</span>
+          <img src="/assets/close.svg" alt="" />
         </button>
       </header>
       <form class="survey">

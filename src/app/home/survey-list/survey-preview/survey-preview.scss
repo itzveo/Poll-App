@@ -1,7 +1,7 @@
-@import './../../../../styles.scss';
+@use './../../../../styles/index' as s;
 
 .survey-preview {
-  @include dFlex();
+  @include s.dFlex();
   flex-direction: column;
   gap: 20px;
   background-color: #423446;
@@ -9,7 +9,7 @@
   border-top-right-radius: 50px;
   padding: 12px 20px 12px 20px;
   > div {
-    @include dFlex($ai: flex-start);
+    @include s.dFlex($ai: flex-start);
     flex-direction: column;
     >h3{
         font: 16px "Mulish-Medium";
@@ -21,7 +21,7 @@
     }
   }
   > p {
-    @include dFlex($ai: flex-end);
+    @include s.dFlex($ai: flex-end);
     flex-direction: column;
     width: 100%;
     >span{

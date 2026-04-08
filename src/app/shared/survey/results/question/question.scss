@@ -1,0 +1,34 @@
+@use './../../../../../styles/index' as s;
+
+.result-question {
+  @include s.dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 12px;
+  >span{
+    font: 18px "Mulish-Bold";
+    color: #35273A;
+  }
+}
+
+.option {
+  @include s.dFlex($ai: flex-start);
+  gap: 6px;
+  > .bar {
+    height: 14px;
+    width: 255px;
+    background-color: #ededed;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    > .bar__inner {
+      background-color: #ffb770;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      width: 27%;
+      height: 14px;
+    }
+  }
+  >span{
+    font: 12px "Mulish-Bold";
+    color: #35273A;
+  }
+}

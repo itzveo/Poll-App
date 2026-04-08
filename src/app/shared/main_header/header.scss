@@ -1,0 +1,48 @@
+@use './../../../styles/index' as s;
+
+.header {
+  @include s.dFlex($jc: space-between);
+  padding-top: 39px;
+  padding-bottom: 92px;
+  width: 100%;
+  > a {
+    display: flex;
+    height: 46px;
+    width: fit-content;
+    > img {
+      object-fit: cover;
+      height: 46px;
+      width: fit-content;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    >.dark{
+      display: none;
+    }
+  }
+  >.create_survey_btn {
+    display: none;
+    gap: 10px;
+    background-color: #ffcfa1;
+    padding: 12px 16px 12px 16px;
+    border-radius: 10px;
+    font: 18px 'Nokora-Bold';
+    color: #221227;
+    border: none;
+    > img {
+      display: none;
+      object-fit: cover;
+      height: 24px;
+      width: 24px;
+    }
+    &:hover {
+      transition: ease-out 0,3s;
+      cursor: pointer;
+      background-color: #ffb770;
+      > img {
+        display: flex;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@use './../../../../styles/index' as s;
+
+.question {
+  @include s.dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  > .published-wrapper {
+    @include s.dFlex($jc: space-between);
+    width: 100%;
+    > .published {
+      @include s.dFlex();
+      background-color: #ffb770;
+      padding: 3px 12px 3px 12px;
+      border-top-right-radius: 14px;
+      font: 16px 'Mulish-SemiBold';
+      color: #221227;
+      width: fit-content;
+    }
+    > button {
+      display: none;
+      gap: 10px;
+      padding: 8px 12px 8px 12px;
+      font: 16px 'Nokora-Bold';
+      color: white;
+      background-color: #FFCFA1;
+      border: none;
+      border-radius: 10px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  > .span-wrapper {
+    @include s.dFlex($jc: space-between);
+    width: 100%;
+    color: #35273a;
+    font: 14px 'Mulish-Medium';
+  }
+  > .title {
+    color: #ee9236;
+    font: 56px 'Nerko';
+  }
+  > .description {
+    color: #35273a;
+    font: 16px 'Mulish-Medium';
+  }
+}

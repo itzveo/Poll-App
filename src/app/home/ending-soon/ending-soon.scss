@@ -1,8 +1,9 @@
-@import "./../../../styles.scss";
+@use "./../../../styles/index" as s;
 
 .ending-soon{
-    @include dFlex();
+    @include s.dFlex();
     flex-direction: column;
+    gap: 56px;
     padding-top: 80px;
     padding-inline: 80px;
     >h2{
@@ -10,8 +11,8 @@
     }
 }
 
-.wrapper{
-    @include dFlex($ai: flex-start);
+.wrapper__ending{
+    @include s.dFlex($ai: flex-start);
     flex-direction: column;
     gap: 32px;
     width: 100%;
@@ -22,7 +23,9 @@
 }
 
 .survey-wrapper{
-    @include dFlex($jc: flex-start);
+    @include s.dFlex($jc: flex-start);
     gap: 32px;
     width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none;
 }

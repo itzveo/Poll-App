@@ -1,0 +1,80 @@
+@use './../abstract' as a;
+
+html, body {
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+@media (min-width: 1166px) {
+  .survey-page > app-main-header > header > button {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 1400px) {
+  .question-wrapper {
+    grid-template-columns: auto !important;
+  }
+}
+
+@media (max-width: 1166px) {
+  .survey-page {
+    padding-inline: 16px !important;
+    padding-bottom: 48px;
+    height: fit-content !important;
+    > app-main-header > header {
+      padding-top: 48px !important;
+      padding-bottom: 56px !important;
+      > button {
+        display: none !important;
+      }
+    }
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+  .survey-wrapper {
+    padding-inline: 16px !important;
+  }
+  .published-wrapper {
+    padding-right: 46px;
+    > button {
+      display: flex !important;
+    }
+  }
+  .survey-overview {
+    @include a.dFlex($ai: flex-start !important, $jc: flex-start !important);
+    flex-direction: column;
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
+    overflow-y: scroll !important;
+    scrollbar-width: none;
+  }
+  .result-wrapper {
+    align-items: flex-start !important;
+    width: 100% !important;
+    > .question-wrapper {
+      width: 100%;
+    }
+  }
+  app-result-question {
+    width: 100%;
+    > .result-question {
+      width: 100%;
+      > span,
+      div {
+        @include a.dFlex($jc: space-between);
+        width: 100%;
+        flex-grow: 1;
+        > .bar__inner {
+          flex-grow: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .question-wrapper {
+    grid-template-columns: auto !important;
+  }
+}

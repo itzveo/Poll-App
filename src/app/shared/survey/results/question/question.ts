@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-question',
+  selector: 'app-result-question',
   imports: [],
   templateUrl: './question.html',
   styleUrl: './question.scss',
 })
-export class Question {}
+export class ResultQuestion {}

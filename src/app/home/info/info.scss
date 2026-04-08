@@ -1,67 +1,71 @@
-@import "./../../../styles.scss";
+@use './../../../styles/index' as s;
 
-.info{
-    @include dFlex($jc: flex-start);
-    gap: 32px;
+.info {
+  @include s.dFlex($jc: flex-start);
+  gap: 32px;
 }
 
-.wrapper__text{
-    width: 712px;
-    @include dFlex($ai: flex-start);
-    flex-direction: column;
-    gap: 40px;
-    >h1{
-        font: 100px "Nerko";
+.wrapper__text {
+  width: 712px;
+  @include s.dFlex($ai: flex-start);
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  > h1 {
+    font: 100px 'Nerko';
+    max-width: 900px;
+  }
+  > p {
+    color: white;
+    font: 24px 'Mulish-SemiBold';
+  }
+  > button {
+    @include s.dFlex();
+    gap: 10px;
+    padding: 12px 16px 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffcfa1;
+    color: #221227;
+    font: 18px 'Nokora-Bold';
+    > img {
+      display: none;
     }
-    >p{
-        color: white;
-        font: 24px "Mulish-SemiBold";
+    &:hover {
+      transition:
+        ease-out 0,
+        3s;
+      cursor: pointer;
+      background-color: #ffb770;
+      > img {
+        display: flex;
+      }
     }
-    >button{
-        @include dFlex();
-        gap: 10px;
-        padding: 12px 16px 12px 16px;
-        border: none;
-        border-radius: 10px;
-        background-color: #FFCFA1;
-        color: #221227;
-        font: 18px "Nokora-Bold";
-        >img{
-            display: none;
-        }
-        &:hover {
-            transition: ease-out 0,3s;
-            cursor: pointer;
-            background-color: #FFB770;
-            >img{
-                display: flex;
-            }
-        }
-    }
+  }
 }
 
-.wrapper__img{
-    @include dFlex();
-    width: 426px;
-    height: 420px;
-    @include dFlex();
-    position: relative;
-    >img{
-        position: absolute;
-        top: 0;
-        left: 0;
+.wrapper__img {
+  @include s.dFlex();
+  width: 426px;
+  height: 420px;
+  @include s.dFlex();
+  position: relative;
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  > .hover {
+    opacity: 0;
+  }
+  &:hover {
+    .mobile {
+      opacity: 0;
+      transition: ease-out 0.7s;
     }
-    >.hover{
-        opacity: 0;
+    .hover {
+      opacity: 1;
+      transition: ease-in 0.7s;
     }
-    &:hover{
-        .mobile{
-            opacity: 0;
-            transition: ease-out 0.7s;
-        }
-        .hover{
-            opacity: 1;
-            transition: ease-in 0.7s;
-        }
-    }
+  }
 }

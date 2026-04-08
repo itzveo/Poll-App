@@ -1,16 +1,16 @@
-@import './../../../styles.scss';
+@use './../../../styles/index' as s;
 
 .survey-list {
   padding-top: 40px;
   padding-inline: 80px;
-  @include dFlex($ai: flex-start);
+  @include s.dFlex($ai: flex-start);
   flex-direction: column;
   > .button-wrapper {
-    @include dFlex($jc: space-between);
+    @include s.dFlex($jc: space-between);
     width: 100%;
     padding-bottom: 40px;
     > div {
-      @include dFlex();
+      @include s.dFlex();
       gap: 24px;
       > button {
         background-color: #fee9d4;
@@ -29,7 +29,7 @@
       }
     }
   }
-  > .wrapper {
+  > .wrapper__surveys {
     --sb-track-color: #35273A;
     --sb-thumb-color: #ffb770;
     --sb-size: 8px;

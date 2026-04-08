@@ -1,7 +1,7 @@
-@import './../../../../styles.scss';
+@use './../../../../styles/index' as s;
 
 .page {
-  @include dFlex($ai: flex-start, $jc: space-between);
+  @include s.dFlex($ai: flex-start, $jc: space-between);
   flex-direction: column;
   background-color: #faf5fe;
   height: 310px;
@@ -9,7 +9,7 @@
   border-top-right-radius: 80px;
   padding: 40px 18px 40px 18px;
   div {
-    @include dFlex($ai: flex-start);
+    @include s.dFlex($ai: flex-start);
     flex-direction: column;
     gap: 8px;
     > h3 {

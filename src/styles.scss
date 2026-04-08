@@ -1,3 +1,9 @@
+@use "./styles/index" as *;
+@use "./styles/layout/main.scss";
+@use "./styles/layout/survey.scss";
+@use "./styles/layout/new.scss";
+
+
 *{
     margin: 0;
     padding: 0;
@@ -43,52 +49,6 @@ a{
     &:visited{
         text-decoration: none;
     }
-}
-
-@mixin dFlex($jc: center, $ai: center){
-    display: flex;
-    justify-content: $jc;
-    align-items: $ai;
-}
-
-@mixin bR($br: 5px, $tr: 20px){
-    border-radius: $br;
-    border-top-right-radius: $tr;
-}
-
-@font-face {
-    font-family: "Mulish-Bold";
-    src: url("/assets/fonts/Mulish-Bold.ttf");
-}
-
-@font-face {
-    font-family: "Mulish-SemiBold";
-    src: url("/assets/fonts/Mulish-SemiBold.ttf");
-}
-
-@font-face {
-    font-family: "Mulish-Medium";
-    src: url("/assets/fonts/Mulish-Medium.ttf");
-}
-
-@font-face {
-    font-family: "Mulish";
-    src: url("/assets/fonts/Mulish-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Nokora-Bold";
-    src: url("/assets/fonts/Nokora-Bold.ttf");
-}
-
-@font-face {
-    font-family: "Nokora";
-    src: url("/assets/fonts/Nokora-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Nerko";
-    src: url("/assets/fonts/NerkoOne-Regular.ttf");
 }
 
 @keyframes blink {

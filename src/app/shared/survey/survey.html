@@ -1,1 +1,31 @@
-<p>survey works!</p>
+<section class="survey-page">
+  <app-main-header></app-main-header>
+  <div class="survey-overview">
+    <section class="survey-wrapper">
+      <app-header></app-header>
+      <section class="question-wrapper">
+        <app-question></app-question>
+        <app-question></app-question>
+        <app-question></app-question>
+        <app-question></app-question>
+        <app-question></app-question>
+        <app-question></app-question>
+      </section>
+      <button class="complete_btn"></button>
+    </section>
+    <section class="result-wrapper">
+      <button class="results-toggle" id="results-toggle">Close results<img src="/assets/drop_down.svg" alt=""><img src="/assets/drop_down_hover.svg" alt=""></button>
+      <div class="title-wrapper">
+        <h2>Survey results</h2>
+        <h2 class="orange">LIVE</h2>
+      </div>
+      <div class="question-wrapper">
+        <app-result-question></app-result-question>
+        <app-result-question></app-result-question>
+        <app-result-question></app-result-question>
+        <app-result-question></app-result-question>
+        <app-result-question></app-result-question>
+      </div>
+    </section>
+  </div>
+</section>

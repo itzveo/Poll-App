@@ -1,7 +1,7 @@
-@import './../../../styles.scss';
+@use './../../../styles/index' as s;
 
 .question {
-  @include dFlex($ai: flex-start);
+  @include s.dFlex($ai: flex-start);
   flex-direction: column;
   gap: 24px;
   width: 100%;
@@ -9,12 +9,12 @@
 }
 
 .Q {
-  @include dFlex($ai: flex-start);
+  @include s.dFlex($ai: flex-start);
   flex-direction: column;
   gap: 8px;
   width: 100%;
   > div {
-    @include dFlex($jc: space-between);
+    @include s.dFlex($jc: space-between);
     width: 100%;
     > h2 {
       font: 18px 'Mulish-Bold';
@@ -24,27 +24,28 @@
 }
 
 .A {
-  @include dFlex($ai: flex-start);
+  @include s.dFlex($ai: flex-start);
   flex-direction: column;
   gap: 16px;
   width: 100%;
   > div {
-    @include dFlex($jc: space-between);
+    @include s.dFlex($jc: space-between);
     width: 100%;
     > h2 {
       font: 18px 'Mulish-Bold';
       color: white;
     }
     > div {
-      @include dFlex();
+      @include s.dFlex();
       gap: 8px;
+      color: white;
     }
   }
   > .btn_wrapper {
     width: fit-content;
     padding: 8px 12px 8px 12px;
     > button {
-      @include dFlex();
+      @include s.dFlex();
       gap: 4px;
       background: transparent;
       color: white;
@@ -66,7 +67,7 @@
   width: 15px;
   border: solid 1.5px white;
   border-radius: 3px;
-  @include dFlex();
+  @include s.dFlex();
   > img {
     display: none;
     object-fit: cover;
@@ -80,6 +81,6 @@
 }
 
 .answer {
-  @include dFlex();
+  @include s.dFlex();
   gap: 8px;
 }
