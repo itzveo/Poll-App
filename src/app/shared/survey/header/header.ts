@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,15 +7,24 @@ import { Component, Input } from '@angular/core';
   styleUrl: './header.scss',
 })
 export class Header {
-  @Input() survey: any = null;
+  category = input<string>('');
+  name = input<string>('');
+  end_date = input<Date>(new Date());
+  description = input<string>('');
 
   backToHome() {
     window.location.href = '';
   }
 
-  getDaysRemaining(): number | null {
-    if (!this.survey?.ends_at) return null;
-    const diff = new Date(this.survey.ends_at).getTime() - Date.now();
+  daysRemaining = computed(() => {
+    const end = new Date(this.end_date());
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const endNormalized = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+    const diff = endNormalized.getTime() - today.getTime();
     return Math.ceil(diff / (1000 * 60 * 60 * 24));
-  }
+  });
 }

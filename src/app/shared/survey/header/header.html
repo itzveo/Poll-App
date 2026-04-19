@@ -7,18 +7,16 @@
   </div>
   <div class="span-wrapper">
     <span class="date">
-      @if (getDaysRemaining()! > 0) {
-        Ends in {{ getDaysRemaining() }} day{{ getDaysRemaining() === 1 ? '' : 's' }}
+      @if (daysRemaining() <= 0) {
+        <span>Ended</span>
       } @else {
-        Ended
+        <span>Ends in {{ daysRemaining() }} Day{{ daysRemaining() !== 1 ? 's' : '' }}</span>
       }
     </span>
-    @if (survey?.category) {
-      <span class="category">Category: {{ survey.category }}</span>
-    }
+    <span class="category">Category: {{ category() }}</span>
   </div>
-  <h1 class="title">{{ survey?.title }}</h1>
-  @if (survey?.secription) {
-    <p class="description">{{ survey?.description }}</p>
+  <h1 class="title">{{ name() }}</h1>
+  @if (description().trim().length > 0) {
+    <p class="description">{{ description() }}</p>
   }
 </section>

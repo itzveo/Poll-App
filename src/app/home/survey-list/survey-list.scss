@@ -7,7 +7,7 @@
   @include s.dFlex($ai: flex-start);
   flex-direction: column;
   > .button-wrapper {
-    @include s.dFlex($jc: space-between);
+    @include s.dFlex($jc: space-between, $ai: flex-start);
     width: 100%;
     padding-bottom: 40px;
     > div {
@@ -65,7 +65,12 @@
 
 .dropdown-wrapper {
   position: relative;
-  display: inline-block;
+  @include s.dFlex($ai: flex-start !important);
+  flex-direction: column;
+  gap: 0 !important;
+  >span{
+    padding-left: 8px;
+  }
 }
 
 .dropdown-trigger {

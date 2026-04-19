@@ -16,6 +16,7 @@
         Past survey
       </button>
     </div>
+
     <div class="dropdown-wrapper">
       <div class="dropdown-trigger" [class.open]="isDropdownOpen" (click)="toggleDropdown()">
         <span>Select by categories</span>
@@ -37,16 +38,26 @@
         />
       </div>
 
+      @if (selectedCategory()) {
+        <span class="selected-category-badge">
+          {{ selectedCategory() }}
+        </span>
+      }
+
       <div class="dropdown-menu" [class.open]="isDropdownOpen">
-        <div class="dropdown-option">Team activities</div>
-        <div class="dropdown-option">Health & Wellness</div>
-        <div class="dropdown-option">Gaming & Entertainment</div>
-        <div class="dropdown-option">Education & Learning</div>
-        <div class="dropdown-option">Lifestyle & Preferences</div>
-        <div class="dropdown-option">Technology & Innovation</div>
+        @for (category of categories; track category) {
+          <div
+            class="dropdown-option"
+            [class.selected]="selectedCategory() === category"
+            (click)="toggleCategory(category)"
+          >
+            {{ category }}
+          </div>
+        }
       </div>
     </div>
   </div>
+
   <div class="wrapper__surveys">
     @for (survey of dbService.surveys(); track survey.id) {
       <app-survey-preview

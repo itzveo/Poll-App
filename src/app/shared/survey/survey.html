@@ -2,7 +2,12 @@
   <app-main-header></app-main-header>
   <div class="survey-overview">
     <section class="survey-wrapper">
-      <app-header [survey]="survey()"></app-header>
+      <app-header
+        [category]="survey()?.category"
+        [name]="survey()?.name"
+        [end_date]="survey()?.end_date"
+        [description]="survey()?.description"
+      ></app-header>
       <section class="question-wrapper">
         @for (question of questions(); track question.id; let i = $index) {
           <app-question [question]="question" [index]="i"></app-question>
@@ -11,7 +16,12 @@
       <button class="complete_btn"></button>
     </section>
     <section class="result-wrapper">
-      <button class="results-toggle" id="results-toggle">Close results<img src="/assets/drop_down.svg" alt=""><img src="/assets/drop_down_hover.svg" alt=""></button>
+      <button class="results-toggle" id="results-toggle">
+        Close results<img src="/assets/drop_down.svg" alt="" /><img
+          src="/assets/drop_down_hover.svg"
+          alt=""
+        />
+      </button>
       <div class="title-wrapper">
         <h2>Survey results</h2>
         <h2 class="orange">LIVE</h2>
