@@ -2,14 +2,11 @@
   <app-main-header></app-main-header>
   <div class="survey-overview">
     <section class="survey-wrapper">
-      <app-header></app-header>
+      <app-header [survey]="survey()"></app-header>
       <section class="question-wrapper">
-        <app-question></app-question>
-        <app-question></app-question>
-        <app-question></app-question>
-        <app-question></app-question>
-        <app-question></app-question>
-        <app-question></app-question>
+        @for (question of questions(); track question.id; let i = $index) {
+          <app-question [question]="question" [index]="i"></app-question>
+        }
       </section>
       <button class="complete_btn"></button>
     </section>
@@ -20,11 +17,9 @@
         <h2 class="orange">LIVE</h2>
       </div>
       <div class="question-wrapper">
-        <app-result-question></app-result-question>
-        <app-result-question></app-result-question>
-        <app-result-question></app-result-question>
-        <app-result-question></app-result-question>
-        <app-result-question></app-result-question>
+        @for (question of questions(); track question.id) {
+          <app-result-question [question]="question"></app-result-question>
+        }
       </div>
     </section>
   </div>

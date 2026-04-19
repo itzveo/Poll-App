@@ -1,32 +1,60 @@
 <section class="survey-list">
   <div class="button-wrapper">
     <div>
-      <button id="active" class="active--selected">Active survey</button>
-      <button id="past" class="past">Past survey</button>
+      <button
+        id="active"
+        [class.active--selected]="activeFilter() === 'active'"
+        (click)="setFilter('active')"
+      >
+        Active survey
+      </button>
+      <button
+        id="past"
+        [class.past--selected]="activeFilter() === 'past'"
+        (click)="setFilter('past')"
+      >
+        Past survey
+      </button>
     </div>
     <div class="dropdown-wrapper">
-      <div class="dropdown-trigger" onclick="toggleDropdown()">
+      <div class="dropdown-trigger" [class.open]="isDropdownOpen" (click)="toggleDropdown()">
         <span>Select by categories</span>
-        <img src="/assets/drop_down.svg" class="chevron-icon" alt="" width="16" height="16" />
-        <img src="/assets/drop_down_hover.svg" class="chevron-icon" alt="" width="16" height="16" />
+        <img
+          src="/assets/drop_down.svg"
+          class="chevron-icon"
+          [class.rotated]="isDropdownOpen"
+          alt=""
+          width="16"
+          height="16"
+        />
+        <img
+          src="/assets/drop_down_hover.svg"
+          class="chevron-icon--hover"
+          [class.rotated]="isDropdownOpen"
+          alt=""
+          width="16"
+          height="16"
+        />
       </div>
 
-      <div class="dropdown-menu">
-        <div class="dropdown-option">Design</div>
-        <div class="dropdown-option">Development</div>
-        <div class="dropdown-option">Marketing</div>
-        <div class="dropdown-option">Product</div>
+      <div class="dropdown-menu" [class.open]="isDropdownOpen">
+        <div class="dropdown-option">Team activities</div>
+        <div class="dropdown-option">Health & Wellness</div>
+        <div class="dropdown-option">Gaming & Entertainment</div>
+        <div class="dropdown-option">Education & Learning</div>
+        <div class="dropdown-option">Lifestyle & Preferences</div>
+        <div class="dropdown-option">Technology & Innovation</div>
       </div>
     </div>
   </div>
   <div class="wrapper__surveys">
-    <app-survey-preview></app-survey-preview>
-    <app-survey-preview></app-survey-preview>
-    <app-survey-preview></app-survey-preview>
-    <app-survey-preview></app-survey-preview>
-    <app-survey-preview></app-survey-preview>
-    <app-survey-preview></app-survey-preview>
-    <app-survey-preview></app-survey-preview>
-    <app-survey-preview></app-survey-preview>
+    @for (survey of dbService.surveys(); track survey.id) {
+      <app-survey-preview
+        [category]="survey.category"
+        [name]="survey.name"
+        [end_date]="survey.end_date"
+        (click)="onSurveyClick(survey.id)"
+      ></app-survey-preview>
+    }
   </div>
 </section>

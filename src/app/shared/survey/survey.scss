@@ -49,7 +49,7 @@
 }
 
 .result-wrapper {
-  @include s.dFlex($ai: flex-end, $jc: flex-end);
+  @include s.dFlex($ai: flex-end, $jc: flex-start);
   flex-direction: column;
   min-width: 327px;
   height: 80%;

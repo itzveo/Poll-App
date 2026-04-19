@@ -3,6 +3,7 @@
 .info {
   @include s.dFlex($jc: flex-start);
   gap: 32px;
+  max-width: 1218px;
 }
 
 .wrapper__text {

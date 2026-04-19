@@ -38,6 +38,12 @@
   }
 }
 
+@media (max-width: 1080px) {
+  .wrapper__surveys{
+    grid-template-columns: auto !important;
+  }
+}
+
 @media (max-width: 768px) {
   .button-wrapper {
     @include a.dFlex($ai: flex-start !important);
@@ -46,7 +52,6 @@
   }
 
   .wrapper__surveys {
-    grid-template-columns: auto !important;
     height: max-content !important;
   }
 }

@@ -1,9 +1,10 @@
 @use './../../../../styles/index' as s;
 
 .survey-preview {
-  @include s.dFlex();
+  @include s.dFlex($ai: flex-start);
   flex-direction: column;
   gap: 20px;
+  width: 513px;
   background-color: #423446;
   border-radius: 5px;
   border-top-right-radius: 50px;

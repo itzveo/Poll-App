@@ -1,11 +1,15 @@
 <section class="ending-soon">
-    <h2>Your surveys</h2>
-    <div class="wrapper__ending">
-        <h3>Ending soon surveys</h3>
-        <div class="survey-wrapper">
-           <app-page></app-page>
-           <app-page></app-page> 
-           <app-page></app-page> 
-        </div>
+  <h2>Your surveys</h2>
+  <div class="wrapper__ending">
+    <h3>Ending soon surveys</h3>
+    <div class="ending-soon-wrapper">
+      @for (survey of dbService.activeSurveys(); track survey.id) {
+        <app-page
+          [category]="survey.category"
+          [name]="survey.name"
+          [end_date]="survey.end_date"
+        (click)="onSurveyClick(survey.id)"></app-page>
+      }
     </div>
+  </div>
 </section>

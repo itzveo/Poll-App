@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SQuestion } from '../../../../types';
 
 @Component({
   selector: 'app-result-question',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './question.html',
   styleUrl: './question.scss',
 })
-export class ResultQuestion {}
+export class ResultQuestion {
+  @Input() question!: SQuestion;
+
+  getLabel(i: number): string {
+    return String.fromCharCode(65 + i);
+  }
+}

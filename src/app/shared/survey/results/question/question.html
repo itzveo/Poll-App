@@ -1,31 +1,12 @@
 <section class="result-question">
-    <span>1. Which date would work best for you?</span>
+  <span>{{ question.question_text }}</span>
+  @for (answer of question.answers; track answer.id; let i = $index) {
     <div class="option">
-        <span class="#">A</span>
-        <div class="bar">
-            <div class="bar__inner"></div>
-        </div>
-        <span class="%">27%</span>
+      <span class="#">{{ getLabel(i) }}</span>
+      <div class="bar">
+        <div class="bar__inner"></div>
+      </div>
+      <span class="%">27%</span>
     </div>
-    <div class="option">
-        <span class="#">A</span>
-        <div class="bar">
-            <div class="bar__inner"></div>
-        </div>
-        <span class="%">27%</span>
-    </div>
-    <div class="option">
-        <span class="#">A</span>
-        <div class="bar">
-            <div class="bar__inner"></div>
-        </div>
-        <span class="%">27%</span>
-    </div>
-    <div class="option">
-        <span class="#">A</span>
-        <div class="bar">
-            <div class="bar__inner"></div>
-        </div>
-        <span class="%">27%</span>
-    </div>
+  }
 </section>

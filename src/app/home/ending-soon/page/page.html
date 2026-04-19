@@ -1,7 +1,13 @@
 <section class="page">
   <div>
-    <h3>Team activities</h3>
-    <h2>Let's Plan the Next Team Event Together</h2>
+    <h3>{{ category() }}</h3>
+    <h2>{{ name() }}</h2>
   </div>
-  <span>Ends in 1 Day</span>
+  <span>
+    @if (daysRemaining() <= 0) {
+      <span>Ended</span>
+    } @else {
+      <span>Ends in {{ daysRemaining() }} Day{{ daysRemaining() !== 1 ? 's' : '' }}</span>
+    }
+  </span>
 </section>
