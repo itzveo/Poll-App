@@ -6,7 +6,7 @@
   background-color: white;
   height: 100vh;
   width: 100%;
-  >app-main-header{
+  > app-main-header {
     display: none;
   }
 }
@@ -34,7 +34,7 @@
       color: #221227;
       border: none;
       border-radius: 10px;
-      
+
       > img {
         display: none;
         object-fit: contain;
@@ -110,10 +110,39 @@
       @include s.dFlex($ai: flex-start);
       flex-direction: column;
       gap: 8px;
-      padding-right: 40px;
-      width: 50%;
-      > .input-wrapper {
+      padding-right: 0px;
+      width: 445px;
+      > section > .date-input-wrapper {
         justify-content: flex-start !important;
+        width: 50%;
+        min-width: 50%;
+      }
+      > .date-category-wrapper {
+        @include s.dFlex($jc: space-between);
+        width: 100%;
+        > span {
+          font: 18px 'Mulish-Bold';
+          color: white;
+          > small {
+            font: 18px 'Mulish';
+          }
+        }
+        > .dropdown-div {
+          @include s.dFlex($jc: space-between);
+          width: 50%;
+          height: 32px;
+          font: 18px 'Mulish-Bold';
+          color: white;
+          padding: 4px 6px 4px 10px;
+          border-radius: 6px;
+          &:hover {
+            cursor: pointer;
+            background-color: #55475a;
+          }
+          > .dropdown-options {
+            display: none;
+          }
+        }
       }
       > span {
         font: 18px 'Mulish-Bold';
@@ -137,24 +166,10 @@
         @include s.dFlex($jc: flex-start);
         width: 100%;
         gap: 8px;
-        .dropdown-div {
-          @include s.dFlex($jc: space-between);
+        > span {
           width: 50%;
-          height: 32px;
-          font: 18px 'Mulish-Bold';
-          color: white;
-          padding: 4px 6px 4px 10px;
-          border-radius: 6px;
-          &:hover {
-            cursor: pointer;
-            background-color: #55475a;
-          }
-          > .dropdown-options {
-            display: none;
-          }
-        }
-        > div {
-          width: 50%;
+          padding-left: 12px;
+          color: #d09666;
         }
       }
     }
@@ -162,7 +177,7 @@
       @include s.dFlex($ai: flex-start, $jc: flex-start);
       flex-direction: column;
       gap: 8px;
-      width: 50%;
+      width: 445px;
       > span {
         font: 18px 'Mulish-Bold';
         color: white;
@@ -176,17 +191,30 @@
         @include s.bR();
         padding: 15px 13px 7px 13px;
         resize: none;
+        font: 18px 'Mulish-Bold';
+      }
+      > .input-wrapper {
+        @include s.dFlex($ai: flex-start);
+        gap: 8px;
       }
     }
   }
   > .question-wrapper {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 445px 445px;
     gap: 40px;
     width: 100%;
-    > button {
-      @include s.dFlex();
+    > app-question {
+      width: 100%;
+    }
+    > div {
+      display: flex;
+      width: 100%;
+    }
+    > div > button {
+      @include s.dFlex($jc: flex-start);
       gap: 10px;
+      height: 40px;
       background-color: #ffb7704d;
       padding: 8px 12px 8px 12px;
       border-radius: 10px;
@@ -200,4 +228,177 @@
       }
     }
   }
+}
+
+.dropdown-wrapper {
+  position: relative;
+  @include s.dFlex($ai: flex-start !important);
+  flex-direction: column;
+  gap: 0 !important;
+  > span {
+    padding-left: 8px;
+  }
+}
+
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  user-select: none;
+  font: 18px 'Mulish-Bold';
+  color: white;
+
+  &:hover,
+  &.open {
+    background-color: #d9d9d91f;
+    .chevron-icon:not(.chevron-icon--hover) {
+      display: none;
+    }
+    .chevron-icon--hover {
+      display: flex;
+    }
+  }
+}
+
+.chevron-icon {
+  transition: transform 0.25s ease;
+  &--hover {
+    display: none;
+    transition: transform 0.25s ease;
+  }
+}
+
+.chevron-icon.rotated,
+.chevron-icon--hover.rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown-trigger.open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  z-index: 99;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  border: none;
+  background-color: white;
+  border-radius: 6px;
+  padding: 8px 4px;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+.dropdown-menu.open {
+  max-height: 300px;
+  @include s.dFlex($ai: flex-start);
+}
+
+.dropdown-option {
+  padding: 10px;
+  cursor: pointer;
+  width: fit-content;
+  font: 14px 'Mulish';
+  color: #35273a;
+  border-radius: 6px;
+}
+.dropdown-option:hover {
+  background: #f4e9fb;
+}
+
+// === Overlays
+.publish-area {
+  position: relative;
+  overflow: hidden;
+}
+
+.publish-btn {
+  position: relative;
+  z-index: 2;
+}
+
+.error-overlay {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%) translateX(60%);
+  background: #ee9236;
+  color: #fff;
+  padding: 12px;
+  padding-right: 26px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font: 18px 'Nokora';
+  opacity: 0;
+  transition:
+    transform 0.35s,
+    opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 1;
+
+  &.visible {
+    transform: translateY(-50%) translateX(5%);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.input-wrapper.invalid .input,
+.date-input-wrapper.invalid .input {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 1px #c0392b !important;
+}
+
+.dropdown-wrapper.invalid .dropdown-trigger {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 1px #c0392b !important;
+}
+
+.success-overlay {
+  position: absolute;
+  top: 76%;
+  right: 30%;
+  height: 86px;
+  width: 357px;
+  padding-top: 14px;
+  padding-inline: 26px;
+  background: #fee9d4;
+  color: #35273a;
+  @include s.dFlex($jc: space-between, $ai: flex-start);
+  @include s.bR($tr: 50px);
+  z-index: 99;
+  transform: translateX(400%);
+  transition: transform 0.4s;
+
+  p {
+    font: 24px 'Nerko';
+  }
+
+  &.visible {
+    transform: translateX(0);
+  }
+}
+
+.bg-overlay {
+  height: 100vh;
+  width: 100%;
+  z-index: 98;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+}
+
+.success-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
 }

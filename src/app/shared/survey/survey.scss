@@ -28,7 +28,7 @@
 }
 
 .survey-wrapper {
-  @include s.dFlex($ai: flex-start, $jc: flex-start);
+  @include s.dFlex($ai: flex-start, $jc: space-between);
   flex-direction: column;
   gap: 42px;
   background-color: #8e70991a;
@@ -36,8 +36,30 @@
   width: 100%;
   height: 100%;
   padding: 40px;
-  >app-header{
+  > .content-wrapper > app-header {
     width: 100%;
+  }
+  > .button-wrapper {
+    @include s.dFlex($jc: flex-end, $ai: flex-end);
+    width: 100%;
+    > .complete_btn {
+      @include s.dFlex();
+      border: none;
+      border-radius: 10px;
+      padding: 8px 12px;
+      background-color: #ffb7704d;
+      width: 159px;
+      height: 37px;
+      font: 16px 'Nokora-Bold';
+      color: #35273a;
+      &:hover{
+        background-color: #FACEA5;
+        cursor: pointer;
+      }
+      &:disabled{
+        color: #35273aa1;
+      }
+    }
   }
 }
 
@@ -49,12 +71,11 @@
 }
 
 .result-wrapper {
-  @include s.dFlex($ai: flex-end, $jc: flex-start);
+  @include s.dFlex($ai: flex-start, $jc: flex-start);
   flex-direction: column;
-  min-width: 327px;
+  min-width: 327px !important;
   height: 80%;
   overflow-y: auto;
-  padding-right: 4px;
   > .title-wrapper {
     @include s.dFlex($jc: flex-start);
     gap: 8px;
@@ -63,28 +84,28 @@
       font: 32px 'Nerko';
       color: black;
     }
-    >.orange{
-      color: #FFB770;
+    > .orange {
+      color: #ffb770;
     }
   }
-  >.question-wrapper{
+  > .question-wrapper {
     @include s.dFlex($ai: flex-start, $jc: flex-start);
     flex-direction: column;
   }
-  >.results-toggle{
+  > .results-toggle {
     display: none;
     gap: 10px;
-    font: 18px "Mulish-Bold";
-    color: #35273A;
+    font: 18px 'Mulish-Bold';
+    color: #35273a;
     border: none;
     padding: 4px 6px 4px 10px;
-    >img{
+    > img {
       object-fit: cover;
       height: 8px;
       width: 15px;
     }
-    &:hover{
-      background-color: #FAFAFA;
+    &:hover {
+      background-color: #fafafa;
     }
   }
 }

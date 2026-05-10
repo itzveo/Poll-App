@@ -1,1 +1,11 @@
 @use "./../../../../../styles/index" as s;
+
+.empty {
+    @include s.dFlex();
+    flex-direction: column;
+    gap: 146px;
+    >div>span{
+        font: 18px "Mulish-Bold";
+        color: #35273A;
+    }
+}

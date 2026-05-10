@@ -56,15 +56,97 @@ export class WideCaretDirective implements OnInit, OnDestroy {
     on('keyup', () => this.updateCaret());
   }
 
+  private createRuler(): {
+    measure: (text: string) => number;
+    lineHeight: number;
+    remove: () => void;
+  } {
+    const input = this.el.nativeElement;
+    const style = getComputedStyle(input);
+
+    const ruler = document.createElement('span');
+    ruler.style.cssText = `
+    position: absolute;
+    visibility: hidden;
+    white-space: pre;
+    font-size: ${style.fontSize};
+    font-family: ${style.fontFamily};
+    font-weight: ${style.fontWeight};
+    font-style: ${style.fontStyle};
+    letter-spacing: ${style.letterSpacing};
+    padding: 0; margin: 0; border: none;
+  `;
+    document.body.appendChild(ruler);
+
+    ruler.textContent = '\u00A0';
+    const lineHeight = ruler.getBoundingClientRect().height;
+
+    const measure = (text: string): number => {
+      ruler.textContent = text || '\u200b';
+      return ruler.getBoundingClientRect().width;
+    };
+
+    return { measure, lineHeight, remove: () => document.body.removeChild(ruler) };
+  }
+
   private measureCaretLeft(): number {
     const input = this.el.nativeElement;
     const style = getComputedStyle(input);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d')!;
-    ctx.font = `${style.fontSize} ${style.fontFamily}`;
+    const { measure, remove } = this.createRuler();
+
     const text = input.value.substring(0, input.selectionStart ?? 0);
+    const width = text ? measure(text) : 0;
+    remove();
+
     const paddingLeft = parseFloat(style.paddingLeft) || 8;
-    return paddingLeft + ctx.measureText(text).width;
+    return paddingLeft + width;
+  }
+
+  private measureTextareaCaretPosition(): { left: number; top: number } {
+    const input = this.el.nativeElement as HTMLTextAreaElement;
+    const style = getComputedStyle(input);
+    const { measure, lineHeight, remove } = this.createRuler();
+
+    const paddingLeft = parseFloat(style.paddingLeft) || 8;
+    const paddingTop = parseFloat(style.paddingTop) || 0;
+    const maxWidth = input.clientWidth - paddingLeft - (parseFloat(style.paddingRight) || 8);
+
+    const fullText = input.value.substring(0, input.selectionStart ?? 0);
+    const rawLines = fullText.split('\n');
+
+    let totalLines = 0;
+    let lastLineWidth = paddingLeft;
+
+    for (const rawLine of rawLines) {
+      if (rawLine === '') {
+        totalLines++;
+        lastLineWidth = paddingLeft;
+        continue;
+      }
+
+      let currentLine = '';
+
+      for (const char of rawLine) {
+        const testLine = currentLine + char;
+        if (measure(testLine) > maxWidth && currentLine.length > 0) {
+          totalLines++;
+          currentLine = char;
+        } else {
+          currentLine = testLine;
+        }
+      }
+
+      totalLines++;
+      lastLineWidth = paddingLeft + measure(currentLine);
+    }
+
+    remove();
+
+    const caretHeight = 18;
+    return {
+      left: lastLineWidth,
+      top: paddingTop + (totalLines - 1) * lineHeight + (lineHeight - caretHeight) / 2,
+    };
   }
 
   private updateCaret(): void {
@@ -74,17 +156,16 @@ export class WideCaretDirective implements OnInit, OnDestroy {
     const parentRect = input.parentElement!.getBoundingClientRect();
     const offsetLeft = inputRect.left - parentRect.left;
     const offsetTop = inputRect.top - parentRect.top;
-    const style = getComputedStyle(input);
-    const paddingTop = parseFloat(style.paddingTop) || 0;
 
     if (isTextarea) {
-      this.renderer.setStyle(this.caret, 'top', `${offsetTop + paddingTop}px`);
+      const { left, top } = this.measureTextareaCaretPosition();
+      this.renderer.setStyle(this.caret, 'top', `${offsetTop + top}px`);
       this.renderer.setStyle(this.caret, 'transform', 'none');
+      this.renderer.setStyle(this.caret, 'left', `${offsetLeft + left}px`);
     } else {
       this.renderer.setStyle(this.caret, 'top', '50%');
       this.renderer.setStyle(this.caret, 'transform', 'translateY(-50%)');
+      this.renderer.setStyle(this.caret, 'left', `${offsetLeft + this.measureCaretLeft()}px`);
     }
-
-    this.renderer.setStyle(this.caret, 'left', `${offsetLeft + this.measureCaretLeft()}px`);
   }
 }

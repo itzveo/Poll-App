@@ -1,51 +1,78 @@
 <form class="question">
   <div class="Q">
     <div>
-      <h2>1. Question</h2>
-      <div class="delete">
+      <h2>{{ question.id }}. Question</h2>
+      <div
+        class="delete"
+        [class.disabled]="!canDelete"
+        (click)="canDelete && deleteQuestion.emit()"
+        [title]="canDelete ? 'Delete question' : 'At least one question required'"
+      >
         <img class="delete--default" src="/assets/delete.svg" alt="" />
         <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
       </div>
     </div>
-    <div class="input-wrapper">
-      <input wideCaret class="input" type="text" />
+    <div class="input-wrapper" [class.invalid]="isQuestionInvalid">
+      <input
+        wideCaret
+        class="input"
+        type="text"
+        [(ngModel)]="question.title"
+        [name]="'title-' + question.id"
+        maxlength="40"
+      />
       <div class="fake-caret"></div>
     </div>
   </div>
+
   <div class="A">
     <div>
       <h2>Answers</h2>
       <div>
-        <div class="multi-A">
+        <div class="multi-A" [class.checked]="question.multiA" (click)="toggleMultiA()">
           <img src="/assets/check.svg" alt="" />
         </div>
         <span>Allow multiple answers.</span>
       </div>
     </div>
-    <div class="answer">
-      <h2>A.</h2>
-      <div class="input-wrapper">
-        <input wideCaret class="input" type="text" />
-        <div class="fake-caret"></div>
+
+    @for (answer of question.answers; track $index) {
+      <div class="answer">
+        <h2>{{ getLetter($index) }}.</h2>
+        <div class="input-wrapper" [class.invalid]="isAnswerInvalid($index)">
+          <input
+            wideCaret
+            class="input"
+            type="text"
+            [(ngModel)]="answer.text"
+            [name]="'answer-' + question.id + '-' + $index"
+            maxlength="40"
+          />
+          <div class="fake-caret"></div>
+        </div>
+        <div class="delete" (click)="clearAnswer($index)">
+          <img class="delete--default" src="/assets/delete.svg" alt="" />
+          <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+        </div>
+        @if (question.answers.length > 2) {
+          <div class="delete remove-answer" (click)="removeAnswer($index)" title="Remove answer">
+            <img class="delete--default" src="/assets/close_light.svg" alt="" />
+            <img class="delete--hover" src="/assets/close_light.svg" alt="" />
+          </div>
+        }
       </div>
-      <div class="delete">
-        <img class="delete--default" src="/assets/delete.svg" alt="" />
-        <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
-      </div>
-    </div>
-    <div class="answer">
-      <h2>B.</h2>
-      <div class="input-wrapper">
-        <input wideCaret class="input" type="text" />
-        <div class="fake-caret"></div>
-      </div>
-      <div class="delete">
-        <img class="delete--default" src="/assets/delete.svg" alt="" />
-        <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
-      </div>
-    </div>
+    }
+
     <div class="btn_wrapper">
-        <button>Add answer<img src="/assets/add_light.svg" alt=""></button>
+      <button
+        type="button"
+        (click)="addAnswer()"
+        [disabled]="maxAnswersReached"
+        [class.disabled]="maxAnswersReached"
+      >
+        Add answer
+        <img src="/assets/add_light.svg" alt="" />
+      </button>
     </div>
   </div>
 </form>

@@ -4,19 +4,25 @@
     <div>
       @if (question) {
         <h2>{{ question.question_text }}</h2>
-        <span class="1+p">More than one answers are possible.</span>
+        @if (question.multi) {
+          <span class="multi-hint">More than one answers are possible.</span>
+        }
       }
     </div>
   </div>
   <div class="option-wrapper">
     @for (answer of question.answers; track answer.id; let i = $index) {
-      <div class="option">
-        <div class="check">
+      <div
+        class="option"
+        [class.selected]="isSelected(answer.id)"
+        (click)="toggleAnswer(answer.id)"
+      >
+        <div class="check" [class.checked]="isSelected(answer.id)">
           <img src="/assets/check.svg" alt="" />
         </div>
-        <span
-          ><strong>{{ getLabel(i) }}.</strong> {{ answer.answer_text }}</span
-        >
+        <span>
+          <strong>{{ getLabel(i) }}.</strong> {{ answer.answer_text }}
+        </span>
       </div>
     }
   </div>

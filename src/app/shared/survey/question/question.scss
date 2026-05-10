@@ -18,10 +18,19 @@
     @include s.dFlex($ai: flex-start);
     flex-direction: column;
     gap: 8px;
+    width: 100%;
     > .option {
-      @include s.dFlex();
+      @include s.dFlex($jc: flex-start);
       gap: 8px;
       padding-left: 8px;
+      padding-block: 4px;
+      width: 100%;
+      cursor: pointer;
+
+      &:hover:not(.selected) {
+        background-color: #f8e2d3;
+      }
+
       > .check {
         @include s.dFlex();
         height: 15px;
@@ -29,15 +38,20 @@
         border-radius: 3px;
         border: 1.5px solid #35273a;
         > img {
-          display: none;
+          opacity: 0;
+          transition: opacity 0.15s;
           object-fit: contain;
           height: 11px;
           width: 11px;
         }
       }
-      > span {
-        @include s.dFlex();
-        gap: 8px;
+
+      &.selected > .check {
+        background: #ffb770;
+        border-color: #ffb770;
+        > img {
+          opacity: 1;
+        }
       }
     }
   }

@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 24px;
   width: 100%;
-  padding-right: 40px;
+  padding-right: 0px;
 }
 
 .Q {
@@ -55,9 +55,19 @@
       &:hover {
         cursor: pointer;
       }
+      &.disabled,
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .answer-count {
+        font-size: 12px;
+        opacity: 0.6;
+        margin-left: 4px;
+      }
     }
-    &:hover{
-        background-color: #faf5fe33;
+    &:hover {
+      background-color: #faf5fe33;
     }
   }
 }
@@ -78,9 +88,38 @@
     cursor: pointer;
     background-color: #ffcfa199;
   }
+  &.checked {
+    background-color: #FFB770;
+    border: solid 1.5px #FFB770;
+    > img {
+      display: flex;
+    }
+  }
 }
 
 .answer {
   @include s.dFlex();
   gap: 8px;
+}
+
+.delete {
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.remove-answer {
+  margin-left: 4px;
+}
+
+.input-wrapper.invalid .input,
+.date-input-wrapper.invalid .input {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 1px #c0392b !important;
+}
+
+.dropdown-wrapper.invalid .dropdown-trigger {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 1px #c0392b !important;
 }

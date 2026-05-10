@@ -2,18 +2,28 @@
   <app-main-header></app-main-header>
   <div class="survey-overview">
     <section class="survey-wrapper">
-      <app-header
-        [category]="survey()?.category"
-        [name]="survey()?.name"
-        [end_date]="survey()?.end_date"
-        [description]="survey()?.description"
-      ></app-header>
-      <section class="question-wrapper">
-        @for (question of questions(); track question.id; let i = $index) {
-          <app-question [question]="question" [index]="i"></app-question>
-        }
-      </section>
-      <button class="complete_btn"></button>
+      <div class="content-wrapper">
+        <app-header
+          [category]="survey()?.category"
+          [name]="survey()?.name"
+          [end_date]="survey()?.end_date"
+          [description]="survey()?.description"
+        ></app-header>
+        <section class="question-wrapper">
+          @for (question of questions(); track question.id; let i = $index) {
+            <app-question
+              [question]="question"
+              [index]="i"
+              (selectionChange)="onSelectionChange($event)"
+            ></app-question>
+          }
+        </section>
+      </div>
+      <div class="button-wrapper">
+        <button class="complete_btn" (click)="submitAnswers()" [disabled]="!allAnswered()">
+          Complete survey
+        </button>
+      </div>
     </section>
     <section class="result-wrapper">
       <button class="results-toggle" id="results-toggle">
@@ -27,8 +37,12 @@
         <h2 class="orange">LIVE</h2>
       </div>
       <div class="question-wrapper">
-        @for (question of questions(); track question.id) {
-          <app-result-question [question]="question"></app-result-question>
+        @if (hasResults()) {
+          @for (question of questions(); track question.id) {
+            <app-result-question [question]="question"></app-result-question>
+          }
+        } @else {
+          <app-empty></app-empty>
         }
       </div>
     </section>

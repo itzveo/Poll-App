@@ -2,11 +2,14 @@
   <span>{{ question.question_text }}</span>
   @for (answer of question.answers; track answer.id; let i = $index) {
     <div class="option">
-      <span class="#">{{ getLabel(i) }}</span>
+      <span class="label">{{ getLabel(i) }}.</span>
       <div class="bar">
-        <div class="bar__inner"></div>
+        <div
+          class="bar__inner"
+          [style.width.%]="getPercent(answer)"
+        ></div>
       </div>
-      <span class="%">27%</span>
+      <span class="percent">{{ getPercent(answer) }}%</span>
     </div>
   }
 </section>

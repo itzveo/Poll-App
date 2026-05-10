@@ -4,31 +4,47 @@
   @include s.dFlex($ai: flex-start);
   flex-direction: column;
   gap: 12px;
-  >span{
-    font: 18px "Mulish-Bold";
-    color: #35273A;
-  }
-}
+  width: 100%;
 
-.option {
-  @include s.dFlex($ai: flex-start);
-  gap: 6px;
-  > .bar {
-    height: 14px;
-    width: 255px;
-    background-color: #ededed;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    > .bar__inner {
-      background-color: #ffb770;
+  > span {
+    font: 18px 'Mulish-Bold';
+    color: #35273a;
+  }
+
+  > .option {
+    @include s.dFlex($jc: flex-start);
+    gap: 6px;
+    width: 100%;
+
+    > .label {
+      font: 12px 'Mulish-Bold';
+      color: #35273a;
+      min-width: 15px;
+    }
+
+    > .bar {
+      height: 14px;
+      width: 255px;
+      background-color: #ededed;
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
-      width: 27%;
-      height: 14px;
+      overflow: hidden;
+
+      > .bar__inner {
+        background-color: #ffb770;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        height: 14px;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
     }
-  }
-  >span{
-    font: 12px "Mulish-Bold";
-    color: #35273A;
+
+    > .percent {
+      font: 12px 'Mulish-Bold';
+      font-weight: 800;
+      color: #D79451;
+      min-width: 35px;
+    }
   }
 }
