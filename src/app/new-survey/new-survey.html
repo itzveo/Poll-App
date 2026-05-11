@@ -72,7 +72,9 @@
                   placeholder=""
                   (focus)="endDateInput.placeholder = 'YYYY-MM-DD'"
                   (blur)="endDateInput.placeholder = ''"
-                  maxlength="40"
+                  (keydown)="onDateKeydown($event)"
+                  (input)="onDateInput($event)"
+                  maxlength="10"
                 />
                 <div class="fake-caret"></div>
                 <div class="delete" (click)="endDateInput.value = ''">
@@ -131,21 +133,20 @@
         Please fill in all required fields.
       </div>
       <button class="publish-btn" (click)="publish()" [disabled]="isPublishing">
-        {{ isPublishing ? 'Publishing...' : 'Publish' }}
+        Publish
         <img src="/assets/check.svg" alt="" />
       </button>
     </div>
   </div>
-  @if (showSuccessOverlay) {
-    <div class="success-overlay visible" [class.visible]="dismissSuccess">
-      <p>
-        Your survey is now <br />
-        published
-      </p>
-      <button class="success-close" (click)="dismissSuccess()">
-        <img src="/assets/close_dark.svg" alt="" />
-      </button>
-    </div>
-    <div class="bg-overlay"></div>
-  }
+
+  <div class="success-overlay" [class.visible]="showSuccessOverlay">
+    <p>
+      Your survey is now <br />
+      published
+    </p>
+    <button class="success-close" (click)="dismissSuccess()">
+      <img src="/assets/close_dark.svg" alt="" />
+    </button>
+  </div>
+  <div class="bg-overlay" [class.visible]="showSuccessOverlay"></div>
 </section>
