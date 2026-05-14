@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './header.scss',
 })
 export class Main_Header {
+  /** Opens the new survey page */
   openNewSurvey(){
     window.location.href = "/new";
   }

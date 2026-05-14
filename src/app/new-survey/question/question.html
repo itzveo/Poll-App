@@ -19,7 +19,7 @@
         type="text"
         [(ngModel)]="question.title"
         [name]="'title-' + question.id"
-        maxlength="40"
+        maxlength="50"
       />
       <div class="fake-caret"></div>
     </div>
@@ -38,7 +38,7 @@
 
     @for (answer of question.answers; track $index) {
       <div class="answer">
-        <h2>{{ getLetter($index) }}.</h2>
+        <h2>{{ getLabel($index) }}.</h2>
         <div class="input-wrapper" [class.invalid]="isAnswerInvalid($index)">
           <input
             wideCaret
@@ -46,7 +46,7 @@
             type="text"
             [(ngModel)]="answer.text"
             [name]="'answer-' + question.id + '-' + $index"
-            maxlength="40"
+            maxlength="50"
           />
           <div class="fake-caret"></div>
         </div>

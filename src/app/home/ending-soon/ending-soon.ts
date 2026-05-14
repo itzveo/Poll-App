@@ -13,10 +13,15 @@ export class EndingSoon {
   constructor(private router: Router) {}
   dbService = inject(Supabase);
 
+  /** Fetches all active surveys from the database on component initialization. */
   ngOnInit() {
     this.dbService.getActiveSurveys();
   }
 
+  /**
+   * Navigates to the detail page of the clicked survey.
+   * @param surveyId - The ID of the survey to navigate to.
+   */
   onSurveyClick(surveyId: number) {
     this.router.navigate(['/survey', surveyId]);
   }

@@ -18,7 +18,7 @@
           <div class="left">
             <span>Survey name</span>
             <div class="input-wrapper" [class.invalid]="invalidFields().has('surveyName')">
-              <input wideCaret class="input" type="text" #surveyNameInput maxlength="40" />
+              <input wideCaret class="input" type="text" #surveyNameInput maxlength="50" />
               <div class="fake-caret"></div>
               <div class="delete" (click)="surveyNameInput.value = ''">
                 <img class="delete--default" src="/assets/delete.svg" alt="" />
