@@ -54,4 +54,26 @@
   .wrapper__surveys {
     height: max-content !important;
   }
+
+  .wrapper__text>h1{
+    font: 62px "Nerko" !important;
+  }
+}
+
+@media (max-width: 568px) {
+  .wrapper__surveys{
+    max-height: max-content !important;
+    padding-right: 0 !important;
+  }
+  .survey-preview{
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper__img{
+    transform: scale(0.6);
+    transform-origin: top left;
+    height: 260px !important;
+  }
 }

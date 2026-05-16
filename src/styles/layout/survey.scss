@@ -78,3 +78,10 @@ html, body {
     grid-template-columns: auto !important;
   }
 }
+
+@media (max-width: 360px) {
+  .question-wrapper {
+    transform: scale(0.9);
+    transform-origin: top left;
+  }
+}

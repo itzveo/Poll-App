@@ -19,7 +19,7 @@
         type="text"
         [(ngModel)]="question.title"
         [name]="'title-' + question.id"
-        maxlength="50"
+        maxlength="75"
       />
       <div class="fake-caret"></div>
     </div>
@@ -46,7 +46,7 @@
             type="text"
             [(ngModel)]="answer.text"
             [name]="'answer-' + question.id + '-' + $index"
-            maxlength="50"
+            maxlength="75"
           />
           <div class="fake-caret"></div>
         </div>

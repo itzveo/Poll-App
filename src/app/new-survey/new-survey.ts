@@ -41,6 +41,16 @@ export class NewSurvey {
     private cdr: ChangeDetectorRef,
   ) {}
 
+  /** Sets the backgroundcolor to white */
+  ngOnInit() {
+    document.body.style.backgroundColor = 'white';
+  }
+
+  /** Resets the backgroundcolor, so it doesnt interfere on other routes */
+  ngOnDestroy() {
+    document.body.style.backgroundColor = '';
+  }
+
   /** Appends a new blank question with two empty answers to the questions list. */
   addQuestion(): void {
     this.questions.push({

@@ -18,7 +18,7 @@
           <div class="left">
             <span>Survey name</span>
             <div class="input-wrapper" [class.invalid]="invalidFields().has('surveyName')">
-              <input wideCaret class="input" type="text" #surveyNameInput maxlength="50" />
+              <input wideCaret class="input" type="text" #surveyNameInput maxlength="75" />
               <div class="fake-caret"></div>
               <div class="delete" (click)="surveyNameInput.value = ''">
                 <img class="delete--default" src="/assets/delete.svg" alt="" />
@@ -130,7 +130,7 @@
 
     <div class="publish-area">
       <div class="error-overlay" [class.visible]="showErrorOverlay">
-        Please fill in all required fields.
+        <span class="error-msg"></span>
       </div>
       <button class="publish-btn" (click)="publish()" [disabled]="isPublishing">
         Publish

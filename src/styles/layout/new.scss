@@ -25,9 +25,6 @@
 @media (max-width: 1166px) {
   .wrapper__new_survey {
     padding-inline: 16px !important;
-    >div{
-        @include a.dFlex($jc: center !important);
-    }
   }
   .wrapper__new_survey > main > header {
     @include a.dFlex($ai: flex-start !important);
@@ -50,22 +47,41 @@
         > .dropdown-div {
           display: none !important;
         }
-        >.input-wrapper{
-            width: 100% !important;
+        > .input-wrapper {
+          width: 100% !important;
         }
       }
     }
-    >.right{
+    > .right {
+      width: 100% !important;
+      > div > #description {
         width: 100% !important;
-        >div>#description{
-            width: 100% !important;
-        }
+      }
     }
   }
-  .wrapper__new_survey > main > form > .question-wrapper{
+  .wrapper__new_survey > main > form > .question-wrapper {
     grid-template-columns: auto !important;
-    >app-question>.question{
-        padding-right: 0 !important;
+    > app-question > .question {
+      padding-right: 0 !important;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .success-overlay {
+    position: fixed !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: -200px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    transition: bottom 0.4s ease !important;
+
+    &.visible {
+      bottom: 40px !important;
+      transform: none !important;
     }
   }
 }

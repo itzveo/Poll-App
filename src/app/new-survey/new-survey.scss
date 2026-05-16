@@ -4,7 +4,6 @@
   @include s.dFlex();
   flex-direction: column;
   background-color: white;
-  height: 100vh;
   width: 100%;
   > app-main-header {
     display: none;
@@ -296,11 +295,12 @@
   background-color: white;
   border-radius: 6px;
   padding: 8px 4px;
-  overflow: hidden;
+  overflow: scroll;
+  scrollbar-width: none;
   transition: max-height 0.25s ease;
 }
 .dropdown-menu.open {
-  max-height: 300px;
+  max-height: 400px;
   @include s.dFlex($ai: flex-start);
 }
 
@@ -330,7 +330,7 @@
 .error-overlay {
   position: relative;
   top: 50%;
-  transform: translateY(-50%) translateX(60%);
+  transform: translateX(60%);
   background: #ee9236;
   color: #fff;
   padding: 12px;
@@ -346,9 +346,17 @@
   z-index: 1;
 
   &.visible {
-    transform: translateY(-50%) translateX(5%);
+    transform: translateX(10%);
     opacity: 1;
     pointer-events: auto;
+  }
+}
+
+.error-msg::before {
+  content: "Please fill in all required fields..";
+
+  @media (max-width: 500px) {
+    content: "Incomplete !";
   }
 }
 

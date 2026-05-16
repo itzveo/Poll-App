@@ -123,7 +123,8 @@ export class WideCaretDirective implements OnInit, OnDestroy {
     const width = text ? measure(text) : 0;
     remove();
 
-    return (parseFloat(style.paddingLeft) || 8) + width;
+    const scrollLeft = (input as HTMLInputElement).scrollLeft ?? 0;
+    return (parseFloat(style.paddingLeft) || 8) + width - scrollLeft;
   }
 
   /**
@@ -258,6 +259,32 @@ export class WideCaretDirective implements OnInit, OnDestroy {
   }
 
   /**
+   * Clamps the fake caret's left position to remain within the visible bounds
+   * of the host input element, accounting for horizontal scroll offset.
+   *
+   * When the input content is scrolled (e.g. the user has typed past the visible
+   * area and navigated with arrow keys), the caret's computed position may fall
+   * outside the input's rendered boundaries. This method reads the caret's current
+   * `left` style value and constrains it to the range
+   * `[offsetLeft + paddingLeft, offsetLeft + clientWidth - paddingRight]`,
+   * ensuring the fake caret is never drawn outside the visible input area.
+   *
+   * @param offsetLeft - The horizontal offset of the input relative to its parent in pixels.
+   */
+  private clampInputCaret(offsetLeft: number): void {
+    if (!this.caret) return;
+    const input = this.el.nativeElement;
+    const style = getComputedStyle(input);
+    const paddingLeft = parseFloat(style.paddingLeft) || 8;
+    const paddingRight = parseFloat(style.paddingRight) || 8;
+    const minLeft = offsetLeft + paddingLeft;
+    const maxLeft = offsetLeft + input.clientWidth - paddingRight;
+    const currentLeft = parseFloat(this.caret.style.left);
+    const clamped = Math.max(minLeft, Math.min(currentLeft, maxLeft));
+    this.renderer.setStyle(this.caret, 'left', `${clamped}px`);
+  }
+
+  /**
    * Determines whether the host element is a textarea or a single-line input
    * and delegates to the appropriate caret positioning method.
    */
@@ -269,6 +296,7 @@ export class WideCaretDirective implements OnInit, OnDestroy {
       this.applyTextareaCaretStyles(offsetLeft, offsetTop);
     } else {
       this.applyInputCaretStyles(offsetLeft);
+      this.clampInputCaret(offsetLeft);
     }
   }
 }

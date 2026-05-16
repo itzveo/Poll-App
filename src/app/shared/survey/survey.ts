@@ -26,15 +26,24 @@ export class Survey implements OnInit {
     private supabaseService: Supabase,
   ) {}
 
+  
+
   /**
    * Reads the survey ID from the route and loads the corresponding survey metadata and questions.
+   * Also sets the backgroundcolor of the page to white.
    * @returns A promise that resolves once both loads complete.
    */
   async ngOnInit(): Promise<void> {
+    document.body.style.backgroundColor = 'white';
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
     await this.loadSurvey(id);
     await this.loadQuestions(id);
+  }
+
+  /** Resets the backgroundcolor, so it doesnt interfere on other routes */
+  ngOnDestroy() {
+    document.body.style.backgroundColor = '';
   }
 
   /**
