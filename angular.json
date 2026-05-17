@@ -49,12 +49,18 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "server": "src/main.server.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src"]
+            },
             "outputMode": "server",
             "security": {
               "allowedHosts": []
@@ -73,10 +79,11 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
                 }
               ],
+              "baseHref": "/angular-projects/Poll_App/",
               "outputHashing": "all"
             },
             "development": {

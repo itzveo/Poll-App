@@ -9,7 +9,7 @@
         </div>
         <button (click)="backToHome()" id="cancel">
           <span>Cancel</span>
-          <img src="/assets/close_light.svg" alt="" />
+          <img src="assets/close_light.svg" alt="" />
         </button>
       </header>
 
@@ -21,8 +21,8 @@
               <input wideCaret class="input" type="text" #surveyNameInput maxlength="75" />
               <div class="fake-caret"></div>
               <div class="delete" (click)="surveyNameInput.value = ''">
-                <img class="delete--default" src="/assets/delete.svg" alt="" />
-                <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+                <img class="delete--default" src="assets/delete.svg" alt="" />
+                <img class="delete--hover" src="assets/delete_hover.svg" alt="" />
               </div>
             </div>
 
@@ -36,7 +36,7 @@
                 >
                   <span>{{ 'Select by categories' }}</span>
                   <img
-                    src="/assets/drop_down.svg"
+                    src="assets/drop_down.svg"
                     class="chevron-icon"
                     [class.rotated]="isDropdownOpen"
                     alt=""
@@ -44,7 +44,7 @@
                     height="16"
                   />
                   <img
-                    src="/assets/drop_down_hover.svg"
+                    src="assets/drop_down_hover.svg"
                     class="chevron-icon--hover"
                     [class.rotated]="isDropdownOpen"
                     alt=""
@@ -78,8 +78,8 @@
                 />
                 <div class="fake-caret"></div>
                 <div class="delete" (click)="endDateInput.value = ''">
-                  <img class="delete--default" src="/assets/delete.svg" alt="" />
-                  <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+                  <img class="delete--default" src="assets/delete.svg" alt="" />
+                  <img class="delete--hover" src="assets/delete_hover.svg" alt="" />
                 </div>
               </div>
               @if (selectedCategory()) {
@@ -101,8 +101,8 @@
               ></textarea>
               <div class="fake-caret"></div>
               <div class="delete" (click)="descriptionInput.value = ''">
-                <img class="delete--default" src="/assets/delete.svg" alt="" />
-                <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+                <img class="delete--default" src="assets/delete.svg" alt="" />
+                <img class="delete--hover" src="assets/delete_hover.svg" alt="" />
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@
           }
           <div>
             <button type="button" class="add_q_btn" (click)="addQuestion()">
-              Add next question <img src="/assets/add_light.svg" alt="" />
+              Add next question <img src="assets/add_light.svg" alt="" />
             </button>
           </div>
         </section>
@@ -134,7 +134,7 @@
       </div>
       <button class="publish-btn" (click)="publish()" [disabled]="isPublishing">
         Publish
-        <img src="/assets/check.svg" alt="" />
+        <img src="assets/check.svg" alt="" />
       </button>
     </div>
   </div>
@@ -145,7 +145,7 @@
       published
     </p>
     <button class="success-close" (click)="dismissSuccess()">
-      <img src="/assets/close_dark.svg" alt="" />
+      <img src="assets/close_dark.svg" alt="" />
     </button>
   </div>
   <div class="bg-overlay" [class.visible]="showSuccessOverlay"></div>

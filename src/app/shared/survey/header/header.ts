@@ -1,5 +1,6 @@
-import { Component, computed, inject, input} from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { UtilService } from '../../../util.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,9 @@ import { UtilService } from '../../../util.service';
   styleUrl: './header.scss',
 })
 export class Header {
-private utilService = inject(UtilService);
+  constructor(private router: Router) {}
+
+  private utilService = inject(UtilService);
 
   category = input<string>('');
   name = input<string>('');
@@ -17,7 +20,7 @@ private utilService = inject(UtilService);
 
   /** Navigates to home page */
   backToHome() {
-    window.location.href = '';
+    this.router.navigate(['']);
   }
 
   /** Calculates the number of calendar days remaining until the given end date. */

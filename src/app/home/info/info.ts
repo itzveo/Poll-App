@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-info',
@@ -7,9 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './info.scss',
 })
 export class Info {
+  constructor(private router: Router) {}
 
   /** Opens the new survey page */
-  openNewSurvey(){
-    window.location.href = "/new";
+  openNewSurvey() {
+    this.router.navigate(['/new']);
   }
 }

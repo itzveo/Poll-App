@@ -8,8 +8,8 @@
         (click)="canDelete && deleteQuestion.emit()"
         [title]="canDelete ? 'Delete question' : 'At least one question required'"
       >
-        <img class="delete--default" src="/assets/delete.svg" alt="" />
-        <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+        <img class="delete--default" src="assets/delete.svg" alt="" />
+        <img class="delete--hover" src="assets/delete_hover.svg" alt="" />
       </div>
     </div>
     <div class="input-wrapper" [class.invalid]="isQuestionInvalid">
@@ -30,7 +30,7 @@
       <h2>Answers</h2>
       <div>
         <div class="multi-A" [class.checked]="question.multiA" (click)="toggleMultiA()">
-          <img src="/assets/check.svg" alt="" />
+          <img src="assets/check.svg" alt="" />
         </div>
         <span>Allow multiple answers.</span>
       </div>
@@ -51,13 +51,13 @@
           <div class="fake-caret"></div>
         </div>
         <div class="delete" (click)="clearAnswer($index)">
-          <img class="delete--default" src="/assets/delete.svg" alt="" />
-          <img class="delete--hover" src="/assets/delete_hover.svg" alt="" />
+          <img class="delete--default" src="assets/delete.svg" alt="" />
+          <img class="delete--hover" src="assets/delete_hover.svg" alt="" />
         </div>
         @if (question.answers.length > 2) {
           <div class="delete remove-answer" (click)="removeAnswer($index)" title="Remove answer">
-            <img class="delete--default" src="/assets/close_light.svg" alt="" />
-            <img class="delete--hover" src="/assets/close_light.svg" alt="" />
+            <img class="delete--default" src="assets/close_light.svg" alt="" />
+            <img class="delete--hover" src="assets/close_light.svg" alt="" />
           </div>
         }
       </div>
@@ -71,7 +71,7 @@
         [class.disabled]="maxAnswersReached"
       >
         Add answer
-        <img src="/assets/add_light.svg" alt="" />
+        <img src="assets/add_light.svg" alt="" />
       </button>
     </div>
   </div>

@@ -11,6 +11,7 @@ import { Question, QuestionModel } from './question/question';
 import { WideCaretDirective } from '../wide-caret.directive';
 import { Main_Header } from '../shared/main_header/header';
 import { Supabase, CATEGORIES, Category } from '../supabase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-survey',
@@ -39,6 +40,7 @@ export class NewSurvey {
   constructor(
     public dbService: Supabase,
     private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   /** Sets the backgroundcolor to white */
@@ -75,7 +77,7 @@ export class NewSurvey {
 
   /** Navigates the user back to the home page. */
   backToHome(): void {
-    window.location.href = '';
+    this.router.navigate(['']);
   }
 
   /** Toggles the category dropdown open/closed state. */
@@ -384,6 +386,6 @@ export class NewSurvey {
   /** Hides the success overlay and redirects the user to the newly created survey's detail page. */
   dismissSuccess(): void {
     this.showSuccessOverlay = false;
-    window.location.href = `survey/${this.createdSurveyId}`;
+     this.router.navigate([`/survey/${this.createdSurveyId}`]);
   }
 }
