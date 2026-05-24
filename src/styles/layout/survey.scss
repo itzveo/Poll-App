@@ -5,6 +5,27 @@ html, body {
   scrollbar-width: none;
 }
 
+@media (min-width: 2560px) {
+  .survey-overview{
+    zoom: 1.4;
+  }
+}
+
+@media (min-width: 1960px) {
+  .survey-overview{
+    zoom: 1.2;
+  }
+}
+
+@media (min-width: 1560px) {
+  .survey-page{
+    align-items: center !important;
+  }
+  .survey-overview{
+    max-width: 1500px;
+  }
+}
+
 @media (min-width: 1166px) {
   .survey-page > app-main-header > header > button {
     display: flex !important;

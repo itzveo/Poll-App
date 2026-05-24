@@ -123,3 +123,8 @@
   border-color: #c0392b !important;
   box-shadow: 0 0 0 1px #c0392b !important;
 }
+
+.input-wrapper.invalid .input::placeholder {
+  color: #c0392b;
+  opacity: 1;
+}

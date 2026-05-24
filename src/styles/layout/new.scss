@@ -1,5 +1,22 @@
 @use './../abstract' as a;
 
+@media (min-width: 2560px) and (min-height: 1560px) {
+  .wrapper__new_survey{
+    transform: scale(1.6) !important;
+  }
+}
+
+@media (min-width: 1660px) and (min-height: 1560px) {
+  .new-survey{
+    justify-content: flex-start !important;
+    padding-top: 10%;
+  }
+  .wrapper__new_survey{
+    transform: scale(1.4);
+    transform-origin: top center;
+  }
+}
+
 @media (max-width: 1375px) {
   .new-survey {
     gap: 54px;

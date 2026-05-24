@@ -1,5 +1,26 @@
 @use './../abstract' as a;
 
+@media (min-width: 2560px) {
+  app-main-header, app-info, app-ending-soon, app-survey-list{
+    zoom: 1.6;
+  }
+}
+
+@media (min-width: 1960px) {
+  app-main-header, app-info, app-ending-soon, app-survey-list{
+    zoom: 1.4;
+  }
+}
+
+@media (min-width: 1560px) {
+  .home{
+    align-items: center !important;
+  }
+  app-info, app-ending-soon, app-survey-list{
+    max-width: 1500px;
+  }
+}
+
 @media (max-width: 1375px) {
   .home>app-info>.info {
     @include a.dFlex($ai: flex-start !important);
@@ -67,6 +88,11 @@
   }
   .survey-preview{
     width: 100% !important;
+  }
+  .ending-soon-wrapper{
+    transform: scale(0.7);
+    transform-origin: top left;
+    width: 130% !important;
   }
 }
 

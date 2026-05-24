@@ -1,7 +1,7 @@
 export interface SAnswer {
   id: number;
   answer_text: string;
-  vote_count?: number; 
+  vote_count?: number;
 }
 
 export interface SQuestion {
@@ -9,4 +9,13 @@ export interface SQuestion {
   question_text: string;
   multi: boolean;
   answers: SAnswer[];
+}
+
+export interface CalendarCell {
+  date: Date;
+  day: number;
+  currentMonth: boolean;
+  disabled: boolean;
+  selected: boolean;
+  today: boolean;
 }

@@ -143,3 +143,117 @@ a{
   pointer-events: none;
   animation: blink 1s step-end infinite;
 }
+
+// === Overlays
+.publish-area {
+  position: relative;
+  overflow: hidden;
+}
+
+.publish-btn {
+  position: relative;
+  z-index: 2;
+}
+
+.error-overlay {
+  position: relative;
+  top: 50%;
+  transform: translateX(60%);
+  background: #ee9236;
+  color: #fff;
+  padding: 12px;
+  padding-right: 26px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font: 18px 'Nokora';
+  opacity: 0;
+  transition:
+    transform 0.35s,
+    opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 1;
+
+  &.visible {
+    transform: translateX(10%);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.error-msg::before {
+  content: 'Please fill in all required fields..';
+
+  @media (max-width: 500px) {
+    content: 'Incomplete !';
+  }
+}
+
+.input-wrapper.invalid .input,
+.date-input-wrapper.invalid .input {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 1px #c0392b !important;
+}
+
+.dropdown-wrapper.invalid .dropdown-trigger {
+  border-color: #c0392b !important;
+  box-shadow: 0 0 0 1px #c0392b !important;
+}
+
+.input-wrapper.invalid .input::placeholder,
+.date-input-wrapper.invalid .input::placeholder {
+  color: #c0392b;
+  opacity: 1;
+}
+
+.success-overlay {
+  display: none;
+  position: fixed;
+  bottom: 72px;
+  right: 109px;
+  height: 86px;
+  width: 357px;
+  padding-top: 14px;
+  padding-inline: 26px;
+  background: #fee9d4;
+  color: #35273a;
+  @include dFlex($jc: space-between, $ai: flex-start);
+  @include bR($tr: 50px);
+  z-index: 99;
+  transform: translateX(400%);
+  transition: transform 0.4s ease;
+
+  p {
+    font: 24px 'Nerko';
+  }
+
+  &.visible {
+    transform: translateX(0);
+    display: block;
+  }
+}
+
+.bg-overlay {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  z-index: 98;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transition: background-color 0.3s ease;
+
+  &.visible {
+    background-color: rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+    display: block;
+  }
+}
+
+.success-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}

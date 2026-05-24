@@ -18,7 +18,14 @@
           <div class="left">
             <span>Survey name</span>
             <div class="input-wrapper" [class.invalid]="invalidFields().has('surveyName')">
-              <input wideCaret class="input" type="text" #surveyNameInput maxlength="75" />
+              <input
+                wideCaret
+                class="input"
+                type="text"
+                #surveyNameInput
+                maxlength="75"
+                [placeholder]="invalidFields().has('surveyName') ? 'This field is required !' : ''"
+              />
               <div class="fake-caret"></div>
               <div class="delete" (click)="surveyNameInput.value = ''">
                 <img class="delete--default" src="assets/delete.svg" alt="" />
@@ -69,17 +76,49 @@
                   class="input"
                   type="text"
                   #endDateInput
-                  placeholder=""
-                  (focus)="endDateInput.placeholder = 'YYYY-MM-DD'"
-                  (blur)="endDateInput.placeholder = ''"
+                  [placeholder]="
+                    invalidFields().has('endDate')
+                      ? 'This field is required !'
+                      : endDateInput.matches(':focus')
+                        ? 'YYYY-MM-DD'
+                        : ''
+                  "
                   (keydown)="onDateKeydown($event)"
                   (input)="onDateInput($event)"
                   maxlength="10"
                 />
                 <div class="fake-caret"></div>
-                <div class="delete" (click)="endDateInput.value = ''">
+                <div class="calendar-icon-btn" (click)="toggleCalendar($event)">
+                  <img src="assets/calendar.svg" alt="" />
+                </div>
+                <div class="delete" (click)="endDateInput.value = ''; closeCalendar()">
                   <img class="delete--default" src="assets/delete.svg" alt="" />
                   <img class="delete--hover" src="assets/delete_hover.svg" alt="" />
+                </div>
+                <div
+                  class="calendar-popup"
+                  *ngIf="isCalendarOpen"
+                  (click)="$event.stopPropagation()"
+                >
+                  <div class="cal-header">
+                    <button type="button" (click)="prevMonth()">&#8249;</button>
+                    <span>{{ calendarMonth | date: 'MMMM yyyy' }}</span>
+                    <button type="button" (click)="nextMonth()">&#8250;</button>
+                  </div>
+                  <div class="cal-weekdays">
+                    <span *ngFor="let d of weekdays">{{ d }}</span>
+                  </div>
+                  <div class="cal-days">
+                    <span
+                      *ngFor="let day of calendarDays"
+                      [class.empty]="!day"
+                      [class.disabled]="day && isPast(day)"
+                      [class.selected]="day && isSelected(day)"
+                      [class.today]="day && isToday(day)"
+                      (click)="day && !isPast(day) && selectDay(day)"
+                      >{{ day?.getDate() }}</span
+                    >
+                  </div>
                 </div>
               </div>
               @if (selectedCategory()) {

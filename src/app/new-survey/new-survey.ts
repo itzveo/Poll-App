@@ -29,6 +29,11 @@ export class NewSurvey {
   showSuccessOverlay = false;
   invalidFields = signal<Set<string>>(new Set());
 
+  isCalendarOpen = false;
+  calendarMonth = new Date();
+  weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+  calendarDays: (Date | null)[] = [];
+
   @ViewChild('surveyNameInput') surveyNameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('endDateInput') endDateInput!: ElementRef<HTMLInputElement>;
   @ViewChild('descriptionInput') descriptionInput!: ElementRef<HTMLTextAreaElement>;
@@ -40,7 +45,7 @@ export class NewSurvey {
   constructor(
     public dbService: Supabase,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
   ) {}
 
   /** Sets the backgroundcolor to white */
@@ -75,9 +80,9 @@ export class NewSurvey {
     }
   }
 
-  /** Navigates the user back to the home page. */
+  /** Navigates the user back to the last page. */
   backToHome(): void {
-    this.router.navigate(['']);
+    history.back();
   }
 
   /** Toggles the category dropdown open/closed state. */
@@ -102,14 +107,15 @@ export class NewSurvey {
   }
 
   /**
-   * Global click handler that closes the dropdown when clicking outside it,
-   * and dismisses the error overlay when clicking outside it or the publish button.
+   * Global click handler that closes the dropdown and the calendar when clicking outside it,
+   * dismisses the error overlay when clicking outside it or the publish button.
    * @param event - The native mouse click event.
    */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     if (!target.closest('.dropdown-wrapper')) this.isDropdownOpen = false;
+    if (!target.closest('.date-input-wrapper')) this.closeCalendar(); // NEU
     if (this.showSuccessOverlay || this.isPublishing) return;
     if (
       this.showErrorOverlay &&
@@ -353,6 +359,97 @@ export class NewSurvey {
     }
   }
 
+  /** Toggles the calendar popup open or closed and builds the calendar grid when opening. */
+  toggleCalendar(event: MouseEvent): void {
+    event.stopPropagation();
+    this.isCalendarOpen = !this.isCalendarOpen;
+    if (this.isCalendarOpen) this.buildCalendar();
+  }
+
+  /** Closes the calendar popup. */
+  closeCalendar(): void {
+    this.isCalendarOpen = false;
+  }
+
+  /** Navigates the calendar one month back and rebuilds the day grid. */
+  prevMonth(): void {
+    this.calendarMonth = new Date(
+      this.calendarMonth.getFullYear(),
+      this.calendarMonth.getMonth() - 1,
+      1,
+    );
+    this.buildCalendar();
+  }
+
+  /** Navigates the calendar one month forward and rebuilds the day grid. */
+  nextMonth(): void {
+    this.calendarMonth = new Date(
+      this.calendarMonth.getFullYear(),
+      this.calendarMonth.getMonth() + 1,
+      1,
+    );
+    this.buildCalendar();
+  }
+
+  /**
+   * Builds the array of day cells for the currently displayed month,
+   * prepending null values as empty offset cells so the first day
+   * aligns to the correct weekday column (Monday-based).
+   */
+  buildCalendar(): void {
+    const year = this.calendarMonth.getFullYear();
+    const month = this.calendarMonth.getMonth();
+    const firstDay = new Date(year, month, 1);
+    let startOffset = (firstDay.getDay() + 6) % 7;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const days: (Date | null)[] = [];
+    for (let i = 0; i < startOffset; i++) days.push(null);
+    for (let d = 1; d <= daysInMonth; d++) days.push(new Date(year, month, d));
+    this.calendarDays = days;
+  }
+
+  /**
+   * Returns true if the given date is before today (time stripped).
+   * @param date - The date to check.
+   */
+  isPast(date: Date): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
+  }
+
+  /**
+   * Returns true if the given date matches today's date.
+   * @param date - The date to check.
+   */
+  isToday(date: Date): boolean {
+    const today = new Date();
+    return date.toDateString() === today.toDateString();
+  }
+
+  /**
+   * Returns true if the given date matches the value currently entered in the date input.
+   * @param date - The date to check against the input value.
+   */
+  isSelected(date: Date): boolean {
+    const val = this.endDateInput?.nativeElement.value;
+    if (!val) return false;
+    const [y, m, d] = val.split('-').map(Number);
+    return date.getFullYear() === y && date.getMonth() + 1 === m && date.getDate() === d;
+  }
+
+  /**
+   * Writes the selected date into the date input in YYYY-MM-DD format and closes the calendar.
+   * @param date - The day the user clicked.
+   */
+  selectDay(date: Date): void {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    this.endDateInput.nativeElement.value = `${y}-${m}-${d}`;
+    this.isCalendarOpen = false;
+  }
+
   /**
    * Validates the form and, if valid, inserts the survey, its questions, and their
    * answers into the database. Shows the success overlay on completion or returns
@@ -386,6 +483,6 @@ export class NewSurvey {
   /** Hides the success overlay and redirects the user to the newly created survey's detail page. */
   dismissSuccess(): void {
     this.showSuccessOverlay = false;
-     this.router.navigate([`/survey/${this.createdSurveyId}`]);
+    this.router.navigate([`/survey/${this.createdSurveyId}`]);
   }
 }
