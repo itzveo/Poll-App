@@ -5,6 +5,8 @@ import {
   ViewChild,
   ElementRef,
   ChangeDetectorRef,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Question, QuestionModel } from './question/question';
@@ -37,6 +39,8 @@ export class NewSurvey {
   @ViewChild('surveyNameInput') surveyNameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('endDateInput') endDateInput!: ElementRef<HTMLInputElement>;
   @ViewChild('descriptionInput') descriptionInput!: ElementRef<HTMLTextAreaElement>;
+
+  @Output() closed = new EventEmitter<void>();
 
   questions: QuestionModel[] = [
     { id: 1, title: '', multiA: false, answers: [{ text: '' }, { text: '' }] },
@@ -80,9 +84,9 @@ export class NewSurvey {
     }
   }
 
-  /** Navigates the user back to the last page. */
-  backToHome(): void {
-    history.back();
+  /** Closes the new survey dialog. */
+  close(): void {
+    this.closed.emit();
   }
 
   /** Toggles the category dropdown open/closed state. */

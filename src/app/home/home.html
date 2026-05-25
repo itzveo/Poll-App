@@ -1,6 +1,10 @@
 <section class="home">
-  <app-main-header></app-main-header>
-  <app-info></app-info>
+  <app-main-header (newSurvey)="openNewSurvey()"></app-main-header>
+  <app-info (newSurvey)="openNewSurvey()"></app-info>
   <app-ending-soon></app-ending-soon>
   <app-survey-list></app-survey-list>
+
+  @if (showNewSurvey()) {
+    <app-new-survey (closed)="closeNewSurvey()"></app-new-survey>
+  }
 </section>

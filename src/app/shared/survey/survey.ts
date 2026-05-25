@@ -7,10 +7,11 @@ import { Question } from './question/question';
 import { Header } from './header/header';
 import { ResultQuestion } from './results/question/question';
 import { Empty } from './results/empty/empty';
+import { NewSurvey } from '../../new-survey/new-survey';
 
 @Component({
   selector: 'app-survey',
-  imports: [Main_Header, Question, Header, ResultQuestion, Empty],
+  imports: [Main_Header, Question, Header, ResultQuestion, Empty, NewSurvey],
   templateUrl: './survey.html',
   styleUrl: './survey.scss',
 })
@@ -18,6 +19,7 @@ export class Survey implements OnInit {
   survey = signal<any>(null);
   questions = signal<SQuestion[]>([]);
   selections = signal<Map<number, number[]>>(new Map());
+  showNewSurvey = signal(false);
 
   @ViewChildren(Question) questionComponents!: QueryList<Question>;
 
@@ -151,5 +153,13 @@ export class Survey implements OnInit {
     }
     await this.refreshQuestions();
     this.resetState();
+  }
+
+  openNewSurvey(): void {
+    this.showNewSurvey.set(true);
+  }
+
+  closeNewSurvey(): void {
+    this.showNewSurvey.set(false);
   }
 }

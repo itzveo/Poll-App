@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,15 +8,23 @@ import { Router } from '@angular/router';
   styleUrl: './header.scss',
 })
 export class Main_Header {
+  @Output() newSurvey = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
+
   constructor(private router: Router) {}
 
-  /** Opens the new survey page */
+  /** Opens the new survey dialog */
   openNewSurvey() {
-    this.router.navigate(['/new']);
+    this.newSurvey.emit();
   }
 
   /** Opens the home page */
-  backToHome(){
+  backToHome() {
     this.router.navigate(['']);
+  }
+
+  /** Closes the new survey dialog. */
+  close(): void {
+    this.closed.emit();
   }
 }

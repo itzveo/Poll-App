@@ -1,5 +1,8 @@
 <section class="survey-page">
-  <app-main-header></app-main-header>
+  <app-main-header (newSurvey)="openNewSurvey()"></app-main-header>
+  @if (showNewSurvey()) {
+    <app-new-survey (closed)="closeNewSurvey()"></app-new-survey>
+  }
   <div class="survey-overview">
     <section class="survey-wrapper">
       <div class="content-wrapper">

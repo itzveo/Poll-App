@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
   styleUrl: './info.scss',
 })
 export class Info {
+  @Output() newSurvey = new EventEmitter<void>();
+
   constructor(private router: Router) {}
 
-  /** Opens the new survey page */
-  openNewSurvey() {
-    this.router.navigate(['/new']);
+  /** Opens the new survey dialog */
+  openNewSurvey(): void {
+    this.newSurvey.emit();
   }
 }
