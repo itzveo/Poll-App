@@ -24,5 +24,8 @@
   }
   app-main-header{
     width: 100% !important;
+    >.header>.create_survey_btn{
+      display: none !important;
+    }
   }
 }

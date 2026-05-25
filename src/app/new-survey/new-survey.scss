@@ -8,6 +8,20 @@
   background: white; 
 }
 
+::ng-deep app-main-header {
+  width: 100%;
+  > .header {
+    @include s.dFlex($jc: space-between);
+    width: 100%;
+    >button>.dark{
+      display: flex !important;
+    }
+    >button>.light{
+      display: none !important;
+    }
+  }
+}
+
 .new-survey {
   @include s.dFlex();
   flex-direction: column;

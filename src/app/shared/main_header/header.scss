@@ -19,31 +19,41 @@
         cursor: pointer;
       }
     }
-    >.dark{
+    > .dark {
       display: none;
     }
   }
-  >.create_survey_btn {
+  > .create_survey_btn {
     display: none;
-    gap: 10px;
-    background-color: #ffcfa1;
-    padding: 12px 16px 12px 16px;
-    border-radius: 10px;
-    font: 18px 'Nokora-Bold';
-    color: #221227;
+    position: relative;
+    padding: 12px 16px;
     border: none;
+    border-radius: 10px;
+    background-color: #ffcfa1;
+    color: #221227;
+    font: 18px 'Nokora-Bold';
+    transition:
+      background-color 0.3s ease,
+      padding-right 0.3s ease;
     > img {
-      display: none;
-      object-fit: cover;
-      height: 24px;
-      width: 24px;
+      position: absolute;
+      right: 16px;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+      transform: translateX(20px);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+      pointer-events: none;
     }
     &:hover {
-      transition: ease-out 0,3s;
       cursor: pointer;
       background-color: #ffb770;
+      padding-right: 44px;
       > img {
-        display: flex;
+        opacity: 1;
+        transform: translateX(0);
       }
     }
   }
