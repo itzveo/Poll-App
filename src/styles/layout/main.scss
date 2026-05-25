@@ -16,14 +16,13 @@
   .home{
     align-items: center !important;
   }
-  app-info, app-ending-soon, app-survey-list{
+  app-main-header, app-info, app-ending-soon, app-survey-list{
     max-width: 1500px;
   }
 }
 
 @media (max-width: 1375px) {
   .home>app-info>.info {
-    @include a.dFlex($ai: flex-start !important);
     flex-direction: column;
 
     .wrapper__text {
@@ -101,5 +100,8 @@
     transform: scale(0.6);
     transform-origin: top left;
     height: 260px !important;
+  }
+  .home>app-info>.info {
+    @include a.dFlex($ai: flex-start !important);
   }
 }

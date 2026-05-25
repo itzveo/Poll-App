@@ -21,8 +21,11 @@ export class EndingSoon {
   /**
    * Navigates to the detail page of the clicked survey.
    * @param surveyId - The ID of the survey to navigate to.
+   * @param endDate - The Date on which the survey ends.
    */
-  onSurveyClick(surveyId: number) {
+  onSurveyClick(surveyId: number, endDate: Date) {
+    const isExpired = new Date(endDate) < new Date();
+    if (isExpired) return;
     this.router.navigate(['/survey', surveyId]);
   }
 }

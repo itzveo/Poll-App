@@ -30,7 +30,12 @@
       &:hover:not(.selected) {
         background-color: #f8e2d3;
       }
-
+      >span{
+        font: 16px "Mulish";
+        >strong{
+          font: 16px "Mulish-Bold";
+        } 
+      }
       > .check {
         @include s.dFlex();
         height: 15px;

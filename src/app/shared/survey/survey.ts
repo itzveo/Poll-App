@@ -17,7 +17,7 @@ import { Empty } from './results/empty/empty';
 export class Survey implements OnInit {
   survey = signal<any>(null);
   questions = signal<SQuestion[]>([]);
-  selections = new Map<number, number[]>();
+  selections = signal<Map<number, number[]>>(new Map());
 
   @ViewChildren(Question) questionComponents!: QueryList<Question>;
 
@@ -25,8 +25,6 @@ export class Survey implements OnInit {
     private route: ActivatedRoute,
     private supabaseService: Supabase,
   ) {}
-
-  
 
   /**
    * Reads the survey ID from the route and loads the corresponding survey metadata and questions.
@@ -67,7 +65,9 @@ export class Survey implements OnInit {
     const { data } = await this.supabaseService.supabase
       .from('questions')
       .select('*, answers(*)')
-      .eq('survey_id', id);
+      .eq('survey_id', id)
+      .order('id')
+      .order('id', { referencedTable: 'answers' });
     this.questions.set(data ?? []);
   }
 
@@ -76,12 +76,16 @@ export class Survey implements OnInit {
    * @param event - Object containing the question ID and the array of selected answer IDs.
    */
   onSelectionChange(event: { questionId: number; answerIds: number[] }): void {
-    this.selections.set(event.questionId, event.answerIds);
+    this.selections.update((map) => {
+      const newMap = new Map(map);
+      newMap.set(event.questionId, event.answerIds);
+      return newMap;
+    });
   }
 
   /** Returns `true` if every question has at least one answer selected. */
   allAnswered(): boolean {
-    return this.questions().every((q) => (this.selections.get(q.id)?.length ?? 0) > 0);
+    return this.questions().every((q) => (this.selections().get(q.id)?.length ?? 0) > 0);
   }
 
   /** Returns `true` if any answer in the survey has at least one vote. */
@@ -90,19 +94,13 @@ export class Survey implements OnInit {
   }
 
   /**
-   * Reads the current vote count of an answer and increments it by one in the database.
+   * Increments the current vote count by one in the database.
    * @param answerId - The ID of the answer to increment.
    */
   private async incrementVote(answerId: number): Promise<void> {
-    const { data: current } = await this.supabaseService.supabase
-      .from('answers')
-      .select('vote_count')
-      .eq('id', answerId)
-      .single();
-    await this.supabaseService.supabase
-      .from('answers')
-      .update({ vote_count: (current?.vote_count ?? 0) + 1 })
-      .eq('id', answerId);
+    await this.supabaseService.supabase.rpc('increment_vote', {
+      answer_id: answerId,
+    });
   }
 
   /**
@@ -125,7 +123,9 @@ export class Survey implements OnInit {
     const { data } = await this.supabaseService.supabase
       .from('questions')
       .select('*, answers(*)')
-      .eq('survey_id', surveyId);
+      .eq('survey_id', surveyId)
+      .order('id')
+      .order('id', { referencedTable: 'answers' });
     this.questions.set(data ?? []);
   }
 
@@ -134,7 +134,7 @@ export class Survey implements OnInit {
    * back to their initial unanswered state.
    */
   private resetState(): void {
-    this.selections.clear();
+    this.selections.set(new Map());
     this.questionComponents.forEach((q) => q.resetSelection());
   }
 
@@ -146,7 +146,7 @@ export class Survey implements OnInit {
    */
   async submitAnswers(): Promise<void> {
     if (!this.allAnswered()) return;
-    for (const [questionId, answerIds] of this.selections.entries()) {
+    for (const [questionId, answerIds] of this.selections().entries()) {
       await this.submitVotesForQuestion(questionId, answerIds);
     }
     await this.refreshQuestions();

@@ -244,6 +244,16 @@ export class NewSurvey {
     const input = event.target as HTMLInputElement;
     const raw = this.clampDatePart(input.value.replace(/\D/g, ''));
     input.value = this.formatDateString(raw);
+
+    if (raw.length === 8 && !this.isDateValid(input.value)) {
+      this.invalidFields.update((set) => new Set([...set, 'endDate']));
+    } else {
+      this.invalidFields.update((set) => {
+        const next = new Set(set);
+        next.delete('endDate');
+        return next;
+      });
+    }
   }
 
   /**
@@ -258,7 +268,12 @@ export class NewSurvey {
     const [year, month, day] = value.split('-').map(Number);
     if (month < 1 || month > 12 || day < 1 || day > 31) return false;
     const date = new Date(year, month - 1, day);
-    return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+    const isReal =
+      date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+    if (!isReal) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date >= today;
   }
 
   /**

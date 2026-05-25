@@ -47,7 +47,6 @@ body {
   width: 100%;
   color: #FFB770;
   background-color: #35273A;
-  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -228,7 +227,7 @@ a{
 
   &.visible {
     transform: translateX(0);
-    display: block;
+    display: flex;
   }
 }
 

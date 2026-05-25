@@ -1,10 +1,5 @@
 @use './../abstract' as a;
 
-html, body {
-  overflow-y: scroll;
-  scrollbar-width: none;
-}
-
 @media (min-width: 2560px) {
   .survey-overview{
     zoom: 1.4;

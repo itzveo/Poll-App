@@ -64,7 +64,7 @@
         [category]="survey.category"
         [name]="survey.name"
         [end_date]="survey.end_date"
-        (click)="onSurveyClick(survey.id)"
+        (click)="onSurveyClick(survey.id, survey.end_date)"
       ></app-survey-preview>
     }
   </div>

@@ -1,5 +1,12 @@
 @use './../../../styles/index' as s;
 
+::ng-deep app-survey{
+  overflow-y: scroll;
+  scrollbar-width: none;
+  height: 100vh;
+  display: flex;
+}
+
 .survey-page {
   @include s.dFlex($jc: flex-start, $ai: flex-start);
   flex-direction: column;

@@ -12,13 +12,15 @@ export class ResultQuestion {
   private utilService = inject(UtilService);
 
   @Input() question!: SQuestion;
+  @Input() previewSelections: number[] = [];
 
   /**
    * Calculates the total number of votes cast across all answers for this question.
    * @returns The sum of all answer vote counts.
    */
   totalVotes(): number {
-    return this.question.answers.reduce((sum, a) => sum + (a.vote_count ?? 0), 0);
+    const base = this.question.answers.reduce((sum, a) => sum + (a.vote_count ?? 0), 0);
+    return base + (this.previewSelections.length > 0 ? 1 : 0);
   }
 
   /**
@@ -30,7 +32,11 @@ export class ResultQuestion {
   getPercent(answer: SAnswer): number {
     const total = this.totalVotes();
     if (total === 0) return 0;
-    return Math.round(((answer.vote_count ?? 0) / total) * 100);
+
+    const isSelected = this.previewSelections.includes(answer.id);
+    const voteCount = (answer.vote_count ?? 0) + (isSelected ? 1 : 0);
+
+    return Math.round((voteCount / total) * 100);
   }
 
   /** Converts a zero-based index to its corresponding uppercase letter label (e.g. 0 → 'A'). */

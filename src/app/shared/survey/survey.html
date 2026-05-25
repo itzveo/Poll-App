@@ -39,7 +39,10 @@
       <div class="question-wrapper">
         @if (hasResults()) {
           @for (question of questions(); track question.id) {
-            <app-result-question [question]="question"></app-result-question>
+            <app-result-question
+              [question]="question"
+              [previewSelections]="selections().get(question.id) ?? []"
+            ></app-result-question>
           }
         } @else {
           <app-empty></app-empty>
