@@ -1,10 +1,9 @@
 @use './../../../styles/index' as s;
 
 .survey-list {
-  max-width: 1218px;
   padding-top: 40px;
   padding-inline: 80px;
-  @include s.dFlex($ai: flex-start);
+  @include s.dFlex();
   flex-direction: column;
   > .button-wrapper {
     @include s.dFlex($jc: space-between, $ai: flex-start);
@@ -24,7 +23,7 @@
           background-color: #ffcfa1;
           cursor: pointer;
         }
-        &.active--selected, &.past--selected {
+        &.selected {
           background-color: #ffb770;
         }
       }

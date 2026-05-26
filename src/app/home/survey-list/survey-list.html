@@ -1,18 +1,17 @@
 <section class="survey-list">
   <div class="button-wrapper">
     <div>
+      <button id="all" [class.selected]="activeFilter() === 'all'" (click)="setFilter('all')">
+        All surveys
+      </button>
       <button
         id="active"
-        [class.active--selected]="activeFilter() === 'active'"
+        [class.selected]="activeFilter() === 'active'"
         (click)="setFilter('active')"
       >
         Active survey
       </button>
-      <button
-        id="past"
-        [class.past--selected]="activeFilter() === 'past'"
-        (click)="setFilter('past')"
-      >
+      <button id="past" [class.selected]="activeFilter() === 'past'" (click)="setFilter('past')">
         Past survey
       </button>
     </div>

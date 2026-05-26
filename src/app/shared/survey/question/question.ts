@@ -34,7 +34,9 @@ export class Question {
       }
     } else {
       updated.clear();
-      updated.add(answerId);
+      if (!this.selectedIds.has(answerId)) {
+        updated.add(answerId);
+      }
     }
     this.selectedIds = updated;
     this.selectionChange.emit({

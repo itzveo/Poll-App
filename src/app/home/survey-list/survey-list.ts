@@ -27,14 +27,12 @@ export class SurveyList implements OnInit {
   }
 
   /**
-   * Toggles an active/past filter. If the given filter is already active, resets to 'all'.
-   * Triggers a new survey fetch with the updated filter and current category.
-   * @param filter - The filter mode to apply ('active' or 'past').
+   * Toggles an all/active/past filter.
+   * @param filter - The filter mode to apply ('all', 'active' or 'past').
    */
-  setFilter(filter: 'active' | 'past') {
-    const next: FilterMode = this.activeFilter() === filter ? 'all' : filter;
-    this.activeFilter.set(next);
-    this.dbService.getSurveys(next, this.selectedCategory());
+  setFilter(filter: FilterMode) {
+    this.activeFilter.set(filter);
+    this.dbService.getSurveys(filter, this.selectedCategory());
   }
 
   /**

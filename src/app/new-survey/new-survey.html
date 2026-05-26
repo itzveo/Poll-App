@@ -1,5 +1,4 @@
 <section class="new-survey">
-  <app-main-header></app-main-header>
   <div class="wrapper__new_survey">
     <main class="main">
       <header>
@@ -78,7 +77,7 @@
                   #endDateInput
                   [placeholder]="
                     invalidFields().has('endDate')
-                      ? 'This field is required !'
+                      ? 'No past dates!'
                       : endDateInput.matches(':focus')
                         ? 'YYYY-MM-DD'
                         : ''

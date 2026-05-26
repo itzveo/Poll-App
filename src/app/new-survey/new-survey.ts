@@ -11,13 +11,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { Question, QuestionModel } from './question/question';
 import { WideCaretDirective } from '../wide-caret.directive';
-import { Main_Header } from '../shared/main_header/header';
 import { Supabase, CATEGORIES, Category } from '../supabase';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-survey',
-  imports: [CommonModule, Question, WideCaretDirective, Main_Header],
+  imports: [CommonModule, Question, WideCaretDirective],
   templateUrl: './new-survey.html',
   styleUrl: './new-survey.scss',
 })
@@ -51,16 +50,6 @@ export class NewSurvey {
     private cdr: ChangeDetectorRef,
     private router: Router,
   ) {}
-
-  /** Sets the backgroundcolor to white */
-  ngOnInit() {
-    document.body.style.backgroundColor = 'white';
-  }
-
-  /** Resets the backgroundcolor, so it doesnt interfere on other routes */
-  ngOnDestroy() {
-    document.body.style.backgroundColor = '';
-  }
 
   /** Appends a new blank question with two empty answers to the questions list. */
   addQuestion(): void {
@@ -251,6 +240,7 @@ export class NewSurvey {
 
     if (raw.length === 8 && !this.isDateValid(input.value)) {
       this.invalidFields.update((set) => new Set([...set, 'endDate']));
+      input.value = '';
     } else {
       this.invalidFields.update((set) => {
         const next = new Set(set);

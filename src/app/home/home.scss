@@ -1,5 +1,9 @@
 @use './../../styles/index' as s;
 
+:host{
+  @include s.dFlex();
+}
+
 .home {
   @include s.dFlex($jc: flex-start, $ai: flex-start);
   flex-direction: column;
@@ -26,6 +30,20 @@
     width: 100% !important;
     >.header>.create_survey_btn{
       display: none !important;
+    }
+  }
+}
+
+::ng-deep app-main-header {
+  width: 100%;
+  > .header {
+    @include s.dFlex($jc: space-between);
+    width: 100%;
+    > button > .dark {
+      display: none !important;
+    }
+    > button > .light {
+      display: flex !important;
     }
   }
 }

@@ -22,7 +22,6 @@
     gap: 54px;
     overflow-y: scroll;
     scrollbar-width: none;
-    @include a.dFlex($jc: flex-start !important);
     > app-main-header {
       display: flex !important;
       @include a.dFlex();

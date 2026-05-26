@@ -92,7 +92,10 @@ export class Survey implements OnInit {
 
   /** Returns `true` if any answer in the survey has at least one vote. */
   hasResults(): boolean {
-    return this.questions().some((q) => q.answers.some((a) => (a.vote_count ?? 0) > 0));
+    return (
+      this.questions().some((q) => q.answers.some((a) => (a.vote_count ?? 0) > 0)) ||
+      this.selections().size > 0
+    );
   }
 
   /**

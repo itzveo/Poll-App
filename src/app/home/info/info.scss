@@ -3,7 +3,7 @@
 .info {
   @include s.dFlex($jc: flex-start);
   gap: 32px;
-  max-width: 1218px;
+  width: 100%;
 }
 
 .wrapper__text {
@@ -58,7 +58,7 @@
 
 .wrapper__img {
   @include s.dFlex();
-  width: 426px;
+  min-width: 426px;
   height: 420px;
   @include s.dFlex();
   position: relative;

@@ -4,30 +4,17 @@
   position: fixed;
   inset: 0;
   z-index: 1;
+  background: rgba(0, 0, 0, 0.18);
+  min-height: 100vh;
   overflow-y: auto;
-  background: white; 
-}
-
-::ng-deep app-main-header {
-  width: 100%;
-  > .header {
-    @include s.dFlex($jc: space-between);
-    width: 100%;
-    >button>.dark{
-      display: flex !important;
-    }
-    >button>.light{
-      display: none !important;
-    }
-  }
 }
 
 .new-survey {
   @include s.dFlex();
   flex-direction: column;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.18);
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   > app-main-header {
     display: none;
   }
@@ -147,13 +134,18 @@
       gap: 8px;
       padding-right: 0px;
       width: 445px;
-      > section > .date-input-wrapper {
-        justify-content: flex-start !important;
-        width: 50%;
-        min-width: 50%;
-        position: relative;
-        > .input {
-          padding-right: 36px;
+      > section {
+        > .selected-category-badge {
+          font: 14px 'Mulish';
+        }
+        > .date-input-wrapper {
+          justify-content: flex-start !important;
+          width: 50%;
+          min-width: 50%;
+          position: relative;
+          > .input {
+            padding-right: 36px;
+          }
         }
       }
       > .date-category-wrapper {
