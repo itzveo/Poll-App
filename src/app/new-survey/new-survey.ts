@@ -492,6 +492,9 @@ export class NewSurvey {
   /** Hides the success overlay and redirects the user to the newly created survey's detail page. */
   dismissSuccess(): void {
     this.showSuccessOverlay = false;
-    this.router.navigate([`/survey/${this.createdSurveyId}`]);
+    this.closed.emit(); 
+    this.router.navigate([`/survey/${this.createdSurveyId}`]).then(() => {
+      window.location.reload(); 
+    });
   }
 }
