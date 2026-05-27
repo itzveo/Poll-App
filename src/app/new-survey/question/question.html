@@ -20,6 +20,7 @@
         [(ngModel)]="question.title"
         [name]="'title-' + question.id"
         maxlength="75"
+        (blur)="trimTitle()"
         [placeholder]="isQuestionInvalid ? 'This field is required !' : ''"
       />
       <div class="fake-caret"></div>
@@ -48,6 +49,7 @@
             [(ngModel)]="answer.text"
             [name]="'answer-' + question.id + '-' + $index"
             maxlength="75"
+            (blur)="trimAnswer($index)"
             [placeholder]="isAnswerInvalid($index) ? 'This field is required !' : ''"
           />
           <div class="fake-caret"></div>

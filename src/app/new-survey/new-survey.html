@@ -23,6 +23,7 @@
                 type="text"
                 #surveyNameInput
                 maxlength="75"
+                (blur)="onNameBlur()"
                 [placeholder]="invalidFields().has('surveyName') ? 'This field is required !' : ''"
               />
               <div class="fake-caret"></div>

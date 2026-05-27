@@ -270,6 +270,14 @@ export class NewSurvey {
     return date >= today;
   }
 
+  /** Resets the name input when only spaces were entered into the input */
+  onNameBlur(): void {
+    const input = this.surveyNameInput.nativeElement;
+    if (!input.value.trim()) {
+      input.value = '';
+    }
+  }
+
   /**
    * Iterates over all questions and their answers, adding keys to the invalid set
    * for any that have empty titles or answer texts.
@@ -317,14 +325,19 @@ export class NewSurvey {
 
   /**
    * Inserts a new survey record into the database and returns its generated ID.
+   * Also adds 3 days if no date was entered.
    * @param name - The survey title.
    * @param date - The optional end date string in YYYY-MM-DD format, or null.
    * @param description - The optional survey description, or null.
    */
   private async insertSurvey(name: string, date: string | null, description: string | null) {
+    const defaultDate = new Date();
+    defaultDate.setDate(defaultDate.getDate() + 1);
+    const endDate = date ?? defaultDate.toISOString().split('T')[0];
+
     return this.dbService.supabase
       .from('surveys')
-      .insert({ name, end_date: date, description, category: this.selectedCategory() })
+      .insert({ name, end_date: endDate, description, category: this.selectedCategory() })
       .select('id')
       .single();
   }
@@ -492,9 +505,9 @@ export class NewSurvey {
   /** Hides the success overlay and redirects the user to the newly created survey's detail page. */
   dismissSuccess(): void {
     this.showSuccessOverlay = false;
-    this.closed.emit(); 
+    this.closed.emit();
     this.router.navigate([`/survey/${this.createdSurveyId}`]).then(() => {
-      window.location.reload(); 
+      window.location.reload();
     });
   }
 }

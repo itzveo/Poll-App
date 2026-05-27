@@ -58,6 +58,16 @@ export class Question {
     this.question.answers[index].text = '';
   }
 
+  /** Trims the title input. */
+  trimTitle(): void {
+    this.question.title = this.question.title.trim();
+  }
+
+  /** Trims the answer input. */
+  trimAnswer(index: number): void {
+    this.question.answers[index].text = this.question.answers[index].text.trim();
+  }
+
   /** Appends a new blank answer to the question, unless the maximum answer count has been reached. */
   addAnswer(): void {
     if (!this.maxAnswersReached) {

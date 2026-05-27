@@ -190,12 +190,12 @@ a{
 .input-wrapper.invalid .input,
 .date-input-wrapper.invalid .input {
   border-color: #c0392b !important;
-  box-shadow: 0 0 0 1px #c0392b !important;
+  box-shadow: 0 0 0 2px #c0392b !important;
 }
 
 .dropdown-wrapper.invalid .dropdown-trigger {
   border-color: #c0392b !important;
-  box-shadow: 0 0 0 1px #c0392b !important;
+  box-shadow: 0 0 0 2px #c0392b !important;
 }
 
 .input-wrapper.invalid .input::placeholder,
