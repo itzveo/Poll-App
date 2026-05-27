@@ -325,7 +325,7 @@ export class NewSurvey {
 
   /**
    * Inserts a new survey record into the database and returns its generated ID.
-   * Also adds 3 days if no date was entered.
+   * Also adds 1 days if no date was entered.
    * @param name - The survey title.
    * @param date - The optional end date string in YYYY-MM-DD format, or null.
    * @param description - The optional survey description, or null.
